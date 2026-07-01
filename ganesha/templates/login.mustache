@@ -1,0 +1,66 @@
+{{!
+    Ganesha Login Mustache Template.
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+
+{{{ output.standard_top_of_body_html }}}
+
+<div class="ganesha-login-body">
+    <div class="ganesha-login-card">
+        
+        <!-- Large bubble Logo header -->
+        <div class="login-logo floating-cloud">
+            🐘 <span>Ganesha Academy!</span>
+        </div>
+
+        <div class="row align-items-stretch mt-4">
+            
+            <!-- Left Side: Interactive Peek-a-boo Mascot -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="login-mascot-container text-center h-100 d-flex flex-column align-items-center justify-content-center">
+                    <span class="peek-ears">✨ 👑 ✨</span>
+                    <div class="floating-mascot">
+                        <!-- Custom login mascot -->
+                        <img src="{{{ config.wwwroot }}}/theme/ganesha/pix/ganesha_login.png" 
+                             data-peekaboo="{{{ config.wwwroot }}}/theme/ganesha/pix/ganesha_hero.png" 
+                             alt="Ganesha Login Mascot" 
+                             class="ganesha-login-mascot img-fluid" 
+                             style="max-height: 250px;">
+                    </div>
+                    <h4 class="mt-3" style="font-family: 'Fredoka', sans-serif; font-weight:700; color: #ff7e36;">
+                        Your Study Buddy!
+                    </h4>
+                    <p class="text-muted small px-3 text-center mb-0">
+                        Psst! I will cover my eyes if you write your secret password! Try it!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Side: Playful Signboard Login Form -->
+            <div class="col-md-6">
+                <div class="login-form-container">
+                    <h3 class="mb-4" style="font-family: 'Fredoka', sans-serif; font-weight: 700; color: #332d27;">
+                        Hey there! 👋
+                    </h3>
+
+                    {{!
+                        Render Moodle's real login form here. This emits the required
+                        main content placeholder token (without it Moodle throws a
+                        coding_exception) and includes the CSRF logintoken, auth
+                        plugin buttons, and error/notice handling. Style it via the
+                        .login-form-container / .cartoon-input CSS rules.
+                    }}
+                    {{{ output.main_content }}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{{{ output.standard_end_of_body_html }}}
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+// Google Fonts imports are injected dynamically via PHP in lib.php.
+
+// 1. Playful K-12 Color Tokens
+$primary-color: #ff7e36 !default;      // Warm orange
+$secondary-color: #ffc83b !default;    // Sunshine yellow
+$accent-color: #4bb3fd !default;       // Sky blue
+$success-color: #51cb82 !default;      // Lime green
+$pink-accent: #ff758f !default;        // Playful pink
+$purple-accent: #b5179e !default;      // Vibrant purple
+$cream-bg: #fffbf4 !default;           // Warm cream paper background
+
+// 2. Playful Font Overrides
+$font-family-sans-serif: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$headings-font-family: 'Fredoka', sans-serif !default;
+$font-weight-normal: 500 !default; // Bold enough for easy K-12 reading.
+$font-weight-bold: 700 !default;
+
+// 3. Playful Borders & Shadows
+$border-radius-xs: 8px !default;
+$border-radius-sm: 12px !default;
+$border-radius-md: 18px !default;
+$border-radius-lg: 28px !default;
+$border-radius-xl: 40px !default;
+
+// 4. Boost / Bootstrap variable overrides
+$body-bg: $cream-bg !default;
+$body-color: #332d27 !default;
+$link-color: $primary-color !default;
+$link-hover-color: darken($primary-color, 10%) !default;
+
+// Cards and Buttons
+$card-border-radius: $border-radius-lg !default;
+$card-bg: #fffcf0 !default;
+$card-border-color: #f1ebd9 !default;
+$btn-border-radius: $border-radius-md !default;
+$btn-font-weight: 700 !default;
+
+// Custom Outline Styling (Hand-drawn look helper)
+$cartoon-border-width: 3px !default;
+$cartoon-border-color: #332d27 !default;
+$cartoon-shadow: 4px 4px 0px 0px #332d27 !default;
+$cartoon-shadow-hover: 2px 2px 0px 0px #332d27 !default;

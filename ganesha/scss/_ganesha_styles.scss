@@ -1,0 +1,1423 @@
+/* Custom K-12 Playful Styles for Ganesha Theme */
+
+/* ==========================================
+   1. ANIMATIONS & EFFECTS
+   ========================================== */
+
+/* Playful floating animation */
+@keyframes floatAnimation {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes cloudFloat {
+    0% { transform: translateX(0px); }
+    50% { transform: translateX(15px); }
+    100% { transform: translateX(0px); }
+}
+
+@keyframes slowRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes starTwinkle {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0.3; transform: scale(0.8); }
+}
+
+/* Sensory Sparkle Mode animations classes */
+body:not(.sensory-cozy) {
+    .floating-mascot {
+        animation: floatAnimation 4s ease-in-out infinite;
+    }
+    .floating-cloud {
+        animation: cloudFloat 6s ease-in-out infinite;
+    }
+    .spinning-star {
+        animation: slowRotate 20s linear infinite;
+    }
+    .bouncy-hover:hover {
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform: translateY(-8px) scale(1.03);
+    }
+    .pulsing-badge {
+        animation: pulseScale 3s infinite ease-in-out;
+    }
+    .star-twinkle {
+        animation: starTwinkle 2s infinite ease-in-out;
+    }
+}
+
+/* Sensory Cozy Mode (Accessibility overrides) */
+body.sensory-cozy {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+    .bouncy-hover:hover {
+        transform: none !important;
+    }
+}
+
+/* ==========================================
+   2. CARTOON ELEMENT BASICS
+   ========================================== */
+
+/* Cartoon Outline Style */
+.cartoon-card {
+    border: $cartoon-border-width solid $cartoon-border-color !important;
+    border-radius: $border-radius-lg !important;
+    box-shadow: $cartoon-shadow !important;
+    background-color: $card-bg;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        box-shadow: $cartoon-shadow-hover !important;
+        transform: translate(2px, 2px);
+    }
+}
+
+.cartoon-btn {
+    border: $cartoon-border-width solid $cartoon-border-color !important;
+    border-radius: $border-radius-md !important;
+    box-shadow: $cartoon-shadow !important;
+    font-weight: 700;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 24px;
+    
+    &:hover {
+        box-shadow: $cartoon-shadow-hover !important;
+        transform: translate(2px, 2px);
+        text-decoration: none;
+    }
+    
+    &:active {
+        box-shadow: none !important;
+        transform: translate(4px, 4px);
+    }
+}
+
+.btn-adventure-primary {
+    background-color: $primary-color !important;
+    color: #ffffff !important;
+    border-color: $cartoon-border-color !important;
+    
+    &:hover {
+        background-color: darken($primary-color, 8%) !important;
+        color: #ffffff !important;
+    }
+}
+
+.btn-adventure-secondary {
+    background-color: $secondary-color !important;
+    color: #332d27 !important;
+    border-color: $cartoon-border-color !important;
+    
+    &:hover {
+        background-color: darken($secondary-color, 8%) !important;
+        color: #332d27 !important;
+    }
+}
+
+.btn-adventure-accent {
+    background-color: $accent-color !important;
+    color: #ffffff !important;
+    border-color: $cartoon-border-color !important;
+    
+    &:hover {
+        background-color: darken($accent-color, 8%) !important;
+        color: #ffffff !important;
+    }
+}
+
+/* ==========================================
+   3. HEADERS & NAVIGATION
+   ========================================== */
+
+/* Navbar transformation */
+.navbar {
+    border-bottom: 4.5px solid $cartoon-border-color !important;
+    background-color: $card-bg !important;
+    padding: 12px 24px;
+    box-shadow: 0px 4px 0px rgba(51, 45, 39, 0.05);
+    font-family: $font-family-sans-serif;
+    font-weight: 700;
+    
+    .navbar-brand {
+        font-family: $headings-font-family;
+        font-size: 1.8rem;
+        color: $primary-color !important;
+        font-weight: 700;
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        &::before {
+            content: "🐘" !important;
+            font-size: 1.8rem;
+        }
+    }
+    
+    .nav-item {
+        margin: 0 4px;
+        
+        .nav-link {
+            color: #554e45 !important;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 8px 16px !important;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+            
+            &:hover, &.active {
+                background-color: lighten($accent-color, 28%) !important;
+                color: $primary-color !important;
+                border: 2px solid $cartoon-border-color !important;
+                margin-top: -2px;
+                margin-bottom: 2px;
+                box-shadow: 2px 2px 0px $cartoon-border-color;
+            }
+        }
+    }
+    
+    .dropdown-menu {
+        border: 3.5px solid $cartoon-border-color !important;
+        border-radius: $border-radius-md !important;
+        box-shadow: 5px 5px 0px $cartoon-border-color !important;
+        background-color: #ffffff !important;
+        padding: 6px 0;
+        
+        .dropdown-item {
+            font-weight: 700;
+            color: #554e45 !important;
+            border-radius: 8px;
+            margin: 2px 6px;
+            width: calc(100% - 12px);
+            padding: 8px 16px;
+            
+            &:hover {
+                background-color: lighten($secondary-color, 30%) !important;
+                color: $primary-color !important;
+            }
+        }
+    }
+}
+
+/* Floating Sensory Cozy Mode Toggle Button */
+.floating-sensory-btn {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    z-index: 9999 !important;
+    border: 3.5px solid $cartoon-border-color !important;
+    border-radius: 30px !important;
+    box-shadow: 4px 4px 0px $cartoon-border-color !important;
+    background-color: $secondary-color !important;
+    color: #332d27 !important;
+    font-family: $headings-font-family;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 24px !important;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    &:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 2px 2px 0px $cartoon-border-color !important;
+        background-color: darken($secondary-color, 5%) !important;
+    }
+    
+    &:active {
+        transform: translateY(2px) scale(0.98);
+        box-shadow: 1px 1px 0px $cartoon-border-color !important;
+    }
+    
+    &.cozy {
+        background-color: $pink-accent !important;
+        color: #ffffff !important;
+    }
+}
+
+/* Notebook index style side drawers */
+#page-wrapper {
+    background-color: $cream-bg;
+}
+
+[data-region="drawer"] {
+    background-color: #f2f9ff !important;
+    border-right: 4px solid $cartoon-border-color !important;
+    border-left: 4px solid $cartoon-border-color !important;
+    
+    .list-group-item {
+        border-radius: $border-radius-md !important;
+        border: 2px solid transparent;
+        margin: 6px 12px;
+        font-weight: 700;
+        color: #554e45 !important;
+        transition: all 0.2s;
+        
+        &.active, &:hover {
+            background-color: lighten($accent-color, 25%) !important;
+            border-color: $cartoon-border-color !important;
+            color: $cartoon-border-color !important;
+            box-shadow: 3px 3px 0px $cartoon-border-color;
+        }
+    }
+}
+
+/* ==========================================
+   4. CUSTOM HERO & HOMEPAGE
+   ========================================== */
+
+.ganesha-hero-container {
+    background: radial-gradient(circle at 10% 20%, rgb(255, 252, 243) 0%, rgb(255, 237, 217) 90%);
+    border: 4px solid $cartoon-border-color;
+    border-radius: $border-radius-xl;
+    padding: 40px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 6px 6px 0px $cartoon-border-color;
+    
+    /* Playful clouds in corner */
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        right: -30px;
+        width: 200px;
+        height: 100px;
+        background: radial-gradient(circle, #ffffff 60%, transparent 60%);
+        border-radius: 50%;
+        opacity: 0.8;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: $primary-color;
+        text-shadow: 3px 3px 0px #332d27;
+        -webkit-text-stroke: 1px #332d27;
+        margin-bottom: 16px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+        line-height: 1.7;
+        color: #5d5448;
+        max-width: 700px;
+        margin-bottom: 24px;
+        font-weight: 600;
+    }
+}
+
+.mascot-image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        max-height: 280px;
+        filter: drop-shadow(4px 4px 0px rgba(51, 45, 39, 0.15));
+    }
+}
+
+/* Quick links cards */
+.quick-link-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50% !important;
+    border: 4.5px solid $cartoon-border-color !important;
+    box-shadow: 6px 6px 0px $cartoon-border-color !important;
+    font-weight: 800;
+    font-size: 1.05rem;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+    
+    &:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 2px 2px 0px $cartoon-border-color !important;
+        text-decoration: none;
+    }
+    
+    &.pink-bg { background-color: $pink-accent !important; color: #ffffff !important; }
+    &.yellow-bg { background-color: $secondary-color !important; color: #332d27 !important; }
+    &.blue-bg { background-color: $accent-color !important; color: #ffffff !important; }
+    &.purple-bg { background-color: $purple-accent !important; color: #ffffff !important; }
+    &.green-bg { background-color: $success-color !important; color: #ffffff !important; }
+    
+    .quick-icon {
+        font-size: 3.2rem;
+        margin-bottom: 8px;
+        display: block;
+        line-height: 1;
+    }
+}
+
+/* ==========================================
+   5. INTERNAL COURSE PAGES
+   ========================================== */
+
+/* wooden signboard styled headings */
+.course-section-header {
+    background-color: #ffeed3;
+    border: 4.5px solid $cartoon-border-color;
+    border-radius: $border-radius-md;
+    padding: 15px 25px;
+    box-shadow: 5px 5px 0px $cartoon-border-color;
+    display: inline-block;
+    margin-bottom: 25px;
+    position: relative;
+    
+    h3 {
+        margin: 0;
+        font-family: $headings-font-family;
+        font-size: 1.6rem;
+        color: #6e461a;
+        font-weight: 700;
+        text-shadow: 1px 1px 0px #ffffff;
+    }
+}
+
+/* Playful course sections list */
+.course-content {
+    ul.topics, ul.weeks {
+        li.section {
+            border: 4.5px solid $cartoon-border-color !important;
+            border-radius: $border-radius-lg !important;
+            background-color: $card-bg !important;
+            margin-bottom: 30px !important;
+            padding: 30px !important;
+            box-shadow: 6px 6px 0px $cartoon-border-color !important;
+            transition: border-color 0.3s;
+            
+            &.current {
+                border-color: $primary-color !important;
+                background-color: #fffbf4 !important;
+            }
+        }
+    }
+}
+
+/* Playful course progress track */
+.ganesha-progress-container {
+    background-color: $card-bg;
+    border: 4px solid $cartoon-border-color;
+    border-radius: $border-radius-md;
+    padding: 20px;
+    box-shadow: 5px 5px 0px $cartoon-border-color;
+    margin-bottom: 25px;
+    
+    .progress-track-label {
+        font-weight: 700;
+        color: $cartoon-border-color;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .progress {
+        height: 26px;
+        background-color: #f3ecdb;
+        border: 3px solid $cartoon-border-color;
+        border-radius: 13px;
+        overflow: visible;
+        position: relative;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, $secondary-color, $primary-color, $pink-accent);
+        border-radius: 11px;
+        transition: width 0.6s ease;
+        position: relative;
+        
+        &::after {
+            content: "⭐";
+            position: absolute;
+            right: -10px;
+            top: -6px;
+            font-size: 1.3rem;
+            animation: pulseScale 1.5s infinite ease-in-out;
+        }
+    }
+}
+
+/* Bouncy checkbox completions */
+.completion-dialog, .activity-instance {
+    .btn-outline-success, .btn-success {
+        border-radius: 50% !important;
+        width: 42px;
+        height: 42px;
+        padding: 0 !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 3.5px solid $cartoon-border-color !important;
+        box-shadow: 3px 3px 0px $cartoon-border-color !important;
+        transition: all 0.2s;
+        
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+/* Activity Card Skins */
+.activity-item {
+    border-radius: $border-radius-md !important;
+    border: 2px solid $card-border-color;
+    padding: 18px;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+    background-color: $card-bg;
+    border: 4.5px solid $cartoon-border-color !important;
+    box-shadow: 5px 5px 0px $cartoon-border-color !important;
+    
+    &:hover {
+        border-color: $cartoon-border-color;
+        box-shadow: 2px 2px 0px $cartoon-border-color !important;
+        transform: translate(3px, 3px);
+    }
+    
+    &.quiz {
+        background-color: #fffbeb !important;
+        border-left: 12px solid $secondary-color !important;
+        .activityicon { background-color: lighten($secondary-color, 30%); }
+    }
+    &.assign {
+        background-color: #f0faff !important;
+        border-left: 12px solid $accent-color !important;
+        .activityicon { background-color: lighten($accent-color, 30%); }
+    }
+    &.forum {
+        background-color: #fff0f3 !important;
+        border-left: 12px solid $pink-accent !important;
+        .activityicon { background-color: lighten($pink-accent, 25%); }
+    }
+    &.resource {
+        background-color: #f0fdf4 !important;
+        border-left: 12px solid $success-color !important;
+        .activityicon { background-color: lighten($success-color, 30%); }
+    }
+}
+
+/* ==========================================
+   6. CUSTOM PLAYFUL LOGIN PAGE
+   ========================================== */
+
+.ganesha-login-body {
+    background-color: #ffd6a5;
+    background-image: radial-gradient(circle at 20% 30%, #fff0d4 0%, transparent 40%),
+                      radial-gradient(circle at 80% 70%, #ffc6ff 0%, transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.ganesha-login-card {
+    background: #ffffff;
+    border: 4px solid $cartoon-border-color;
+    border-radius: $border-radius-xl;
+    box-shadow: 8px 8px 0px $cartoon-border-color;
+    padding: 40px;
+    max-width: 950px;
+    width: 100%;
+    margin: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.login-mascot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff8eb;
+    border: 3px solid $cartoon-border-color;
+    border-radius: $border-radius-lg;
+    padding: 30px;
+    height: 100%;
+    position: relative;
+    
+    .peek-ears {
+        position: absolute;
+        top: -15px;
+        font-size: 2rem;
+    }
+}
+
+.login-form-container {
+    padding-left: 20px;
+    
+    .form-control {
+        border: 3px solid $cartoon-border-color !important;
+        border-radius: $border-radius-md !important;
+        height: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05);
+        
+        &:focus {
+            border-color: $primary-color !important;
+            box-shadow: 3px 3px 0px rgba(255, 126, 54, 0.2);
+        }
+    }
+    
+    label {
+        font-weight: 700;
+        color: $cartoon-border-color;
+    }
+}
+
+.login-logo {
+    font-family: $headings-font-family;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: $primary-color;
+    text-shadow: 2px 2px 0px #332d27;
+    margin-bottom: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ==========================================
+   7. UTILITIES & FULL-WIDTH RESPONSIVE OVERRIDES
+   ========================================== */
+
+/* Full-Width Canvas & Core Overrides */
+#page-wrapper {
+    background-color: $cream-bg;
+    background-image: radial-gradient(rgba(255, 126, 54, 0.04) 15%, transparent 15%),
+                      radial-gradient(rgba(75, 179, 253, 0.04) 15%, transparent 15%);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+    padding: 0 !important;
+}
+
+/* Stretches container-fluid to the full width of the screen with soft K-12 padding */
+.container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+/* Highly Responsive Multi-column Grid overrides for Quests */
+.quests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    .ganesha-hero-container {
+        padding: 25px !important;
+        border-radius: $border-radius-lg !important;
+    }
+    .hero-title {
+        font-size: 2.2rem !important;
+    }
+}
+
+/* ==========================================
+   8. ENGAGING CARTOON WIDGETS
+   ========================================== */
+
+/* Speech bubble / Owl Fun Fact Widget */
+.fact-bubble-widget {
+    background-color: #fff0f5;
+    border: 3px solid $cartoon-border-color;
+    border-radius: $border-radius-md;
+    box-shadow: 4px 4px 0px $cartoon-border-color;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+    .fact-mascot {
+        font-size: 2.5rem;
+        animation: floatAnimation 3s ease-in-out infinite;
+        flex-shrink: 0;
+    }
+    
+    .fact-text {
+        font-weight: 700;
+        color: #554e45;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        
+        strong {
+            color: $pink-accent;
+        }
+    }
+}
+
+/* Gamified Star Collector Widget */
+.treasure-chest-widget {
+    background-color: #e8f7ff;
+    border: 3px solid $cartoon-border-color;
+    border-radius: $border-radius-lg;
+    box-shadow: 4px 4px 0px $cartoon-border-color;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    
+    &:hover {
+        background-color: #d6f0ff;
+        .chest-icon {
+            transform: scale(1.15) rotate(-3deg);
+        }
+    }
+    
+    .chest-icon {
+        font-size: 3.5rem;
+        display: block;
+        margin-bottom: 8px;
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .chest-label {
+        font-family: $headings-font-family;
+        font-size: 1.1rem;
+        color: $purple-accent;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
+    
+    .star-counter-bubble {
+        background-color: $secondary-color;
+        border: 2px solid $cartoon-border-color;
+        border-radius: 20px;
+        padding: 4px 12px;
+        display: inline-block;
+        font-weight: 800;
+        font-size: 0.9rem;
+        box-shadow: 2px 2px 0px $cartoon-border-color;
+    }
+}
+
+/* Retro Radio Melodies Mockup Widget */
+.vintage-radio-widget {
+    background-color: #fff9e6;
+    border: 3px solid $cartoon-border-color;
+    border-radius: $border-radius-md;
+    box-shadow: 4px 4px 0px $cartoon-border-color;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: center;
+    
+    .radio-brand {
+        font-family: $headings-font-family;
+        font-size: 0.95rem;
+        color: #b35900;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+    
+    .radio-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .radio-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50% !important;
+        border: 2px solid $cartoon-border-color !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        cursor: pointer;
+        background-color: #ffffff;
+        box-shadow: 2px 2px 0px $cartoon-border-color;
+        transition: all 0.1s;
+        
+        &:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px $cartoon-border-color;
+        }
+        
+        &.active {
+            background-color: $success-color;
+            color: #ffffff;
+        }
+    }
+}
+
+/* ==========================================
+   9. RICH STRAWBERRY & LAVENDER GRADIENT CARDS
+   ========================================== */
+.quest-card {
+    &.art {
+        background: linear-gradient(135deg, #ffffff, #fff0f3);
+        border-bottom: 8px solid $pink-accent !important;
+    }
+    &.math {
+        background: linear-gradient(135deg, #ffffff, #fff6eb);
+        border-bottom: 8px solid $primary-color !important;
+    }
+    &.science {
+        background: linear-gradient(135deg, #ffffff, #f0faff);
+        border-bottom: 8px solid $accent-color !important;
+    }
+    &.writing {
+        background: linear-gradient(135deg, #ffffff, #f3ebff);
+        border-bottom: 8px solid $purple-accent !important;
+        border-left: 10px solid $purple-accent !important;
+    }
+}
+
+/* Confetti particles canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+
+/* ==========================================
+   10. GLOBAL MOODLE SYSTEM COMPONENT OVERRIDES
+   ========================================== */
+
+/* Overhaul Moodle Core cards & blocks globally */
+.card, .block, .block-region, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline {
+    border: $cartoon-border-width solid $cartoon-border-color !important;
+    border-radius: $border-radius-lg !important;
+    box-shadow: $cartoon-shadow !important;
+    background-color: $card-bg !important;
+    transition: all 0.2s ease;
+    margin-bottom: 30px !important;
+    overflow: hidden;
+    
+    &:hover {
+        box-shadow: $cartoon-shadow-hover !important;
+        transform: translate(2px, 2px);
+    }
+    
+    .card-body, .card-block, .content {
+        background-color: $card-bg !important;
+        padding: 24px !important;
+    }
+    
+    /* Playful headers for Moodle blocks */
+    .card-title, .block_action, h5.card-title, h5.help-title {
+        font-family: $headings-font-family !important;
+        font-weight: 700 !important;
+        color: $primary-color !important;
+        font-size: 1.35rem !important;
+        border-bottom: 3px solid $cartoon-border-color !important;
+        padding-bottom: 12px !important;
+        margin-bottom: 20px !important;
+        text-transform: capitalize;
+    }
+}
+
+/* Overhaul standard Moodle Available Course List (Courseboxes) */
+.coursebox, .course-list-item, .available-courses .coursebox, .coc-coursebox {
+    border: $cartoon-border-width solid $cartoon-border-color !important;
+    border-radius: $border-radius-md !important;
+    box-shadow: 4px 4px 0px $cartoon-border-color !important;
+    background-color: #ffffff !important;
+    padding: 24px !important;
+    padding-top: 140px !important; // Create space for the playful cartoon placeholder banner
+    margin-bottom: 24px !important;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative !important;
+    overflow: hidden !important;
+    
+    &:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 6px 6px 0px $cartoon-border-color !important;
+        background-color: lighten($secondary-color, 32%) !important;
+    }
+    
+    /* Playful K-12 Cartoon placeholder banner at the top of every course */
+    &::before {
+        content: "📖 Magical Learning Quest";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 110px;
+        background: linear-gradient(135deg, #ffd6a5 0%, #ffadad 100%);
+        border-bottom: 3.5px solid $cartoon-border-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: $headings-font-family;
+        font-size: 1.35rem;
+        font-weight: 800;
+        color: #332d27;
+        text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+        box-sizing: border-box;
+        padding: 15px;
+        text-align: center;
+        z-index: 1;
+    }
+    
+    /* Alternating colors and titles for K-12 subject variety! */
+    &:nth-child(2n)::before {
+        content: "🎨 Creative Arts Adventure";
+        background: linear-gradient(135deg, #caffbf 0%, #9bf6ff 100%);
+    }
+    
+    &:nth-child(3n)::before {
+        content: "🔬 Science Explorer Labs";
+        background: linear-gradient(135deg, #a0c4ff 0%, #bdb2ff 100%);
+    }
+    
+    &:nth-child(4n)::before {
+        content: "🧮 Math Wizardry Challenges";
+        background: linear-gradient(135deg, #ffc6ff 0%, #ffadad 100%);
+    }
+    
+    /* If there is an uploaded Moodle course image, hide the placeholder banner and adjust spacing */
+    &:has(.courseimage), &:has(.coursebox .content .courseimage) {
+        padding-top: 24px !important;
+        &::before {
+            display: none !important;
+        }
+    }
+    
+    /* Premium style for custom uploaded course image container */
+    .courseimage, .content .courseimage {
+        width: 100% !important;
+        height: 160px !important;
+        overflow: hidden !important;
+        border: 3.5px solid $cartoon-border-color !important;
+        border-radius: $border-radius-md !important;
+        box-shadow: 4px 4px 0px $cartoon-border-color !important;
+        margin-bottom: 18px !important;
+        display: block !important;
+        
+        img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+    }
+    
+    .coursename {
+        font-family: $headings-font-family !important;
+        font-size: 1.45rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 10px !important;
+        position: relative;
+        z-index: 2;
+        
+        a {
+            color: $primary-color !important;
+            text-decoration: none !important;
+            transition: color 0.15s;
+            
+            &:hover {
+                color: darken($primary-color, 12%) !important;
+            }
+        }
+    }
+    
+    .content, .teachers, .course-teachers, .moreinfo {
+        font-weight: 700 !important;
+        color: #554e45 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.5;
+        position: relative;
+        z-index: 2;
+        
+        a {
+            color: $accent-color !important;
+            text-decoration: underline !important;
+        }
+    }
+}
+
+/* Style timeline elements and calendar slots */
+.block_timeline, .block_calendar_month {
+    .today {
+        background-color: lighten($secondary-color, 25%) !important;
+        border: 2px solid $cartoon-border-color !important;
+        border-radius: 6px;
+    }
+    
+    .calendar_event {
+        border-left: 6px solid $primary-color !important;
+        background-color: #ffffff !important;
+        margin-bottom: 8px;
+        border-radius: 6px;
+    }
+}
+
+/* Style standard Moodle tables globally (Gradebooks, logs, calendars) */
+.table, .generaltable, .forumheaderlist {
+    border: 3.5px solid $cartoon-border-color !important;
+    border-radius: $border-radius-sm !important;
+    overflow: hidden;
+    background-color: #ffffff !important;
+    box-shadow: 4px 4px 0px $cartoon-border-color !important;
+    
+    thead th, th {
+        background-color: lighten($accent-color, 25%) !important;
+        color: $cartoon-border-color !important;
+        font-family: $headings-font-family !important;
+        font-weight: 700 !important;
+        border: 2.5px solid $cartoon-border-color !important;
+        padding: 12px !important;
+    }
+    
+    tbody td, td {
+        border: 2.5px solid $cartoon-border-color !important;
+        font-weight: 700 !important;
+        color: #554e45 !important;
+        padding: 12px !important;
+        background-color: #ffffff !important;
+    }
+}
+
+/* Playful overrides for Moodle buttons */
+.btn-primary, .btn-secondary, .btn-default, .btn-outline-primary, .btn-outline-secondary, #page-header .btn {
+    border: 3.5px solid $cartoon-border-color !important;
+    border-radius: $border-radius-md !important;
+    box-shadow: 4px 4px 0px $cartoon-border-color !important;
+    font-weight: 700 !important;
+    transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 24px !important;
+    font-family: $headings-font-family !important;
+    font-size: 0.95rem !important;
+    
+    &:hover {
+        box-shadow: 1px 1px 0px $cartoon-border-color !important;
+        transform: translate(3px, 3px);
+        text-decoration: none !important;
+    }
+    
+    &:active {
+        box-shadow: none !important;
+        transform: translate(4px, 4px);
+    }
+}
+
+.btn-primary, #page-header .btn-primary {
+    background-color: $primary-color !important;
+    color: #ffffff !important;
+    
+    &:hover {
+        background-color: darken($primary-color, 8%) !important;
+        color: #ffffff !important;
+    }
+}
+
+.btn-secondary, .btn-default, #page-header .btn-secondary {
+    background-color: $secondary-color !important;
+    color: #332d27 !important;
+    
+    &:hover {
+        background-color: darken($secondary-color, 8%) !important;
+        color: #332d27 !important;
+    }
+}
+
+/* Additional visual overrides for complete, premium theme cohesion */
+
+/* Explicitly style dashboard course overview cards */
+.dashboard-card, .dashboard-card-deck .card, .course-info-container, .block_myoverview .card, .block_recentlyaccessedcourses .card {
+    border: $cartoon-border-width solid $cartoon-border-color !important;
+    border-radius: $border-radius-lg !important;
+    box-shadow: $cartoon-shadow !important;
+    background-color: $card-bg !important;
+    overflow: hidden !important;
+    transition: all 0.2s ease !important;
+    
+    &:hover {
+        box-shadow: $cartoon-shadow-hover !important;
+        transform: translate(2px, 2px) !important;
+    }
+}
+
+/* Gamified Course Overview Progress Bars */
+.block_myoverview .progress {
+    height: 16px !important;
+    border: 2px solid $cartoon-border-color !important;
+    border-radius: 8px !important;
+    background-color: #f3ecdb !important;
+    overflow: visible !important;
+}
+.block_myoverview .progress-bar {
+    background: linear-gradient(90deg, $secondary-color, $primary-color) !important;
+    border-radius: 6px !important;
+}
+
+/* Style Activity icons in course views */
+.activityiconcontainer {
+    border: 2.5px solid $cartoon-border-color !important;
+    border-radius: 10px !important;
+    box-shadow: 2px 2px 0px $cartoon-border-color !important;
+    background-color: #ffffff !important;
+    padding: 6px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Gamified calendar grids & days */
+.minicalendar, .calendar-mini {
+    border: 3px solid $cartoon-border-color !important;
+    border-radius: $border-radius-md !important;
+    box-shadow: 3px 3px 0px $cartoon-border-color !important;
+    background-color: #ffffff !important;
+    
+    th {
+        background-color: lighten($secondary-color, 15%) !important;
+        color: $cartoon-border-color !important;
+        font-family: $headings-font-family !important;
+        font-weight: 700 !important;
+        border: 2px solid $cartoon-border-color !important;
+    }
+    
+    td {
+        border: 2px solid $cartoon-border-color !important;
+        font-weight: 700 !important;
+        
+        &.today {
+            background-color: $pink-accent !important;
+            color: #ffffff !important;
+            border-radius: 6px !important;
+        }
+    }
+}
+
+/* Style standard Moodle form controls system-wide */
+.form-control, select, textarea, input[type="text"], input[type="password"], input[type="email"] {
+    border: 3px solid $cartoon-border-color !important;
+    border-radius: $border-radius-md !important;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05) !important;
+    font-weight: 700 !important;
+    color: #554e45 !important;
+    background-color: #ffffff !important;
+    transition: border-color 0.15s, box-shadow 0.15s !important;
+    
+    &:focus {
+        border-color: $primary-color !important;
+        box-shadow: 3px 3px 0px rgba(255, 126, 54, 0.2) !important;
+        outline: none !important;
+    }
+}
+
+/* ==========================================
+   11. WEATHER SKY SELECTED THEMES
+   ========================================== */
+
+/* Rainbow Mode Styles */
+@keyframes rainbowGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.sky-theme-rainbow {
+    background-image: linear-gradient(135deg, #fff0f5 0%, #fff9e6 25%, #f0faff 50%, #f3ebff 75%, #fff0f5 100%) !important;
+    background-size: 400% 400% !important;
+    animation: rainbowGlow 15s ease infinite !important;
+
+    /* A dreamy, blurred rainbow glow overlay over Ganesha's Hero Banner */
+    .ganesha-hero-container {
+        border-color: #ff758f !important;
+        box-shadow: 6px 6px 0px #ff758f !important;
+        background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 243, 0.95) 90%) !important;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 117, 143, 0.08) 0%, rgba(75, 179, 253, 0.08) 40%, rgba(255, 200, 59, 0.08) 70%, transparent 100%);
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(40px);
+            animation: slowRotate 25s linear infinite;
+        }
+    }
+}
+
+/* Twinkling Starry Night Mode (Cozy Dark Mode Overrides!) */
+@keyframes starryTwinkle {
+    0% { opacity: 0.15; }
+    50% { opacity: 0.35; }
+    100% { opacity: 0.15; }
+}
+
+body.sky-theme-starry {
+    background-color: #121e2b !important;
+    color: #e4ecf5 !important;
+    /* Soft white stardust dot grid */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 15%, transparent 15%),
+                      radial-gradient(rgba(255, 255, 255, 0.06) 15%, transparent 15%) !important;
+    background-size: 40px 40px !important;
+    background-position: 0 0, 20px 20px !important;
+
+    // Reset some base colors for complete dark cohesion
+    #page-wrapper {
+        background: transparent !important;
+    }
+    
+    // Convert general texts to soft white
+    p, span, label, div, select, textarea {
+        &:not(.badge):not(.btn):not(.scratch-prize-label):not(.chest-label):not(.star-counter-bubble) {
+            color: #d1dce7 !important;
+        }
+    }
+
+    // Gorgeous twilight-gradient Hero welcome banner
+    .ganesha-hero-container {
+        background: linear-gradient(135deg, #152232 0%, #1e344e 100%) !important;
+        border-color: #4bb3fd !important;
+        box-shadow: 6px 6px 0px #4bb3fd !important;
+        
+        .hero-title {
+            color: #4bb3fd !important;
+            text-shadow: 3px 3px 0px #121e2b !important;
+            -webkit-text-stroke: 1px #4bb3fd !important;
+        }
+        .hero-subtitle {
+            color: #b9cadc !important;
+        }
+
+        &::after {
+            background: radial-gradient(circle, rgba(75, 179, 253, 0.15) 60%, transparent 60%) !important;
+        }
+    }
+
+    // Convert standard Moodle blocks & cards to glowing neon twilight cards!
+    .card, .block, .block-region, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline, .coursebox, .treasure-chest-widget, .vintage-radio-widget, .fact-bubble-widget {
+        background-color: #1a2d42 !important;
+        border: 3px dashed #4bb3fd !important; // Neon dashed border
+        box-shadow: 4px 4px 0px #4bb3fd, 0px 0px 12px rgba(75, 179, 253, 0.2) !important;
+        
+        &:hover {
+            box-shadow: 2px 2px 0px #4bb3fd, 0px 0px 18px rgba(75, 179, 253, 0.4) !important;
+            border-color: #ff7e36 !important;
+        }
+        
+        .card-body, .card-block, .content {
+            background-color: #1a2d42 !important;
+        }
+        
+        .card-title, .block_action, h5.card-title, h5.help-title {
+            color: #4bb3fd !important;
+            border-bottom: 2.5px solid #4bb3fd !important;
+        }
+    }
+
+    // Navbar dark-theme styling
+    .navbar {
+        background-color: #152232 !important;
+        border-bottom: 4.5px solid #4bb3fd !important;
+
+        .navbar-brand {
+            color: #4bb3fd !important;
+            text-shadow: 2px 2px 0px #121e2b !important;
+        }
+        
+        .nav-item .nav-link {
+            color: #b9cadc !important;
+            
+            &:hover, &.active {
+                background-color: #1e344e !important;
+                color: #4bb3fd !important;
+                border-color: #4bb3fd !important;
+                box-shadow: 2px 2px 0px #4bb3fd !important;
+            }
+        }
+    }
+
+    // Wooden signboards shift to neon twilight signboards
+    .course-section-header {
+        background-color: #1e344e !important;
+        border-color: #4bb3fd !important;
+        box-shadow: 5px 5px 0px #4bb3fd !important;
+        
+        h3 {
+            color: #4bb3fd !important;
+            text-shadow: 1px 1px 0px #121e2b !important;
+        }
+    }
+
+    // Gradebook & standard tables twilight overrides
+    .table, .generaltable, .forumheaderlist {
+        border-color: #4bb3fd !important;
+        box-shadow: 4px 4px 0px #4bb3fd !important;
+        background-color: #1a2d42 !important;
+        
+        thead th, th {
+            background-color: #1e344e !important;
+            color: #4bb3fd !important;
+            border-color: #4bb3fd !important;
+        }
+        
+        tbody td, td {
+            border-color: #4bb3fd !important;
+            background-color: #152232 !important;
+            color: #d1dce7 !important;
+        }
+    }
+
+    // Form inputs twilight overrides
+    .form-control, select, textarea, input[type="text"], input[type="password"], input[type="email"] {
+        background-color: #121e2b !important;
+        border-color: #4bb3fd !important;
+        color: #d1dce7 !important;
+        
+        &:focus {
+            border-color: #ff7e36 !important;
+            box-shadow: 3px 3px 0px rgba(255, 126, 54, 0.3) !important;
+        }
+    }
+
+    // mini calendar grids
+    .minicalendar, .calendar-mini {
+        border-color: #4bb3fd !important;
+        box-shadow: 3px 3px 0px #4bb3fd !important;
+        background-color: #1a2d42 !important;
+        
+        th {
+            background-color: #1e344e !important;
+            color: #4bb3fd !important;
+            border-color: #4bb3fd !important;
+        }
+        td {
+            border-color: #4bb3fd !important;
+            background-color: #152232 !important;
+            
+            &.today {
+                background-color: #ff7e36 !important;
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+
+/* ==========================================
+   12. INTERACTIVE WIDGET STYLING DETAILS
+   ========================================== */
+
+/* Scratch Card styling overrides */
+.scratcher-widget {
+    background-color: #fff8eb !important;
+    
+    .scratch-prize-label {
+        font-family: $headings-font-family !important;
+        animation: floatAnimation 3s ease-in-out infinite;
+    }
+    
+    canvas {
+        background: transparent;
+        touch-action: none; // Prevent touch scrolling when scratching on mobile
+    }
+}
+
+/* Ganesha Modak Feeder Sweet Shop Widget styling */
+.modak-feeder-widget {
+    background-color: #fffbf4 !important;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    &:hover {
+        background-color: #fffefb !important;
+    }
+
+    .modak-mascot {
+        animation: floatAnimation 3s ease-in-out infinite;
+        filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.06));
+        display: inline-block;
+        
+        &:hover {
+            transform: scale(1.15) rotate(4deg);
+        }
+        
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    #pet-speech-bubble {
+        background-color: #ffffff;
+        border: 2.5px solid $cartoon-border-color;
+        border-radius: 12px;
+        padding: 10px;
+        position: relative;
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+        font-family: $font-family-sans-serif;
+        font-style: italic;
+        
+        &::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 10px 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent $cartoon-border-color transparent;
+        }
+        
+        &::after {
+            content: "";
+            position: absolute;
+            top: -7px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 8px 8px 8px;
+            border-style: solid;
+            border-color: transparent transparent #ffffff transparent;
+        }
+    }
+}
+

@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Ganesha - K-12 Premium Dynamic Sandbox</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Moodle CSS Variables & Theme tokens */
+        :root {
+            --primary-color: #ff7e36;      /* Warm Orange */
+            --secondary-color: #ffc83b;    /* Sunshine Yellow */
+            --accent-color: #4bb3fd;       /* Sky Blue */
+            --success-color: #51cb82;      /* Lime Green */
+            --pink-accent: #ff758f;        /* Strawberry Pink */
+            --purple-accent: #b5179e;      /* Lavender Purple */
+            --cream-bg: #fffbf4;           /* Warm Paper Bg */
+            --dark-color: #332d27;         /* Charcoal Outline */
+            
+            --border-radius-lg: 28px;
+            --border-radius-md: 18px;
+            --border-radius-xl: 45px;
+            
+            --cartoon-border-width: 3.5px;
+            --cartoon-shadow: 5px 5px 0px var(--dark-color);
+            --cartoon-shadow-hover: 2px 2px 0px var(--dark-color);
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--cream-bg);
+            background-image: radial-gradient(rgba(255, 126, 54, 0.05) 15%, transparent 15%),
+                              radial-gradient(rgba(75, 179, 253, 0.05) 15%, transparent 15%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Ambient floating animations */
+        @keyframes floatAnimation {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1.5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        @keyframes cloudFloat {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(20px); }
+            100% { transform: translateX(0px); }
+        }
+
+        @keyframes pulseScale {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+
+        /* Sparkle Mode Active classes */
+        body:not(.sensory-cozy) .floating-mascot {
+            animation: floatAnimation 4s ease-in-out infinite;
+        }
+        body:not(.sensory-cozy) .floating-cloud {
+            animation: cloudFloat 8s ease-in-out infinite;
+        }
+        body:not(.sensory-cozy) .pulse-star {
+            animation: pulseScale 1.5s ease-in-out infinite;
+        }
+        body:not(.sensory-cozy) .bouncy-hover:hover {
+            transform: translateY(-8px) scale(1.03);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Sensory Cozy Mode overrides */
+        body.sensory-cozy * {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        /* FULL PAGE WIDTH LAYOUT RULES */
+        .preview-header {
+            background-color: #fffdec;
+            border-bottom: 4px solid var(--dark-color);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Playful Buttons */
+        .cartoon-btn {
+            border: var(--cartoon-border-width) solid var(--dark-color) !important;
+            border-radius: var(--border-radius-md) !important;
+            box-shadow: var(--cartoon-shadow) !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 28px;
+            cursor: pointer;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .cartoon-btn:hover {
+            box-shadow: var(--cartoon-shadow-hover) !important;
+            transform: translate(3px, 3px);
+        }
+
+        .cartoon-btn:active {
+            box-shadow: none !important;
+            transform: translate(5px, 5px);
+        }
+
+        .btn-orange { background-color: var(--primary-color); color: #ffffff; }
+        .btn-yellow { background-color: var(--secondary-color); color: var(--dark-color); }
+        .btn-blue { background-color: var(--accent-color); color: #ffffff; }
+        .btn-pink { background-color: var(--pink-accent); color: #ffffff; }
+
+        /* Custom Header Controls */
+        .mode-toggle-panel {
+            background-color: #ffeed3;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--cartoon-shadow);
+            padding: 15px 40px;
+            margin: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .color-schemes-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Full Width Container Grid */
+        .preview-container {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box;
+            padding: 0 40px 40px 40px;
+        }
+
+        /* Tab selections styles */
+        .tabs-header {
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;
+            padding-left: 20px;
+        }
+
+        .tab-btn {
+            background-color: #fffef0;
+            font-size: 1.25rem;
+            border: 3.5px solid var(--dark-color);
+            border-radius: 20px 20px 0 0;
+            padding: 15px 35px;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            position: relative;
+            top: 4px;
+            transition: all 0.15s ease;
+        }
+
+        .tab-btn.active {
+            background-color: var(--secondary-color);
+            border-bottom: 3.5px solid var(--secondary-color);
+            transform: translateY(-4px);
+        }
+
+        .tab-content {
+            display: none;
+            border: 4px solid var(--dark-color);
+            border-radius: var(--border-radius-lg);
+            background-color: #fffbf0; /* Colorful cream instead of white */
+            padding: 40px;
+            box-shadow: 8px 8px 0px var(--dark-color);
+            margin-bottom: 40px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Panorama banner - occupy full width */
+        .ganesha-hero-container {
+            background: radial-gradient(circle at 10% 20%, rgb(255, 252, 243) 0%, rgb(255, 237, 217) 90%);
+            border: 4px solid var(--dark-color);
+            border-radius: var(--border-radius-xl);
+            padding: 50px 60px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-shadow: 8px 8px 0px var(--dark-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* sloped rainbow pathway inside hero */
+        .ganesha-hero-container::before {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 350px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--pink-accent), var(--secondary-color), var(--accent-color));
+            transform: rotate(-15deg);
+            opacity: 0.15;
+            border-radius: 50px;
+        }
+
+        .hero-left {
+            flex: 1.5;
+            min-width: 350px;
+            padding-right: 40px;
+            z-index: 2;
+        }
+
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.8rem;
+            color: var(--primary-color);
+            text-shadow: 4px 4px 0px var(--dark-color);
+            -webkit-text-stroke: 1.5px var(--dark-color);
+            margin: 0 0 20px 0;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.45rem;
+            color: #5d5448;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+
+        .mascot-img {
+            max-height: 290px;
+            filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.1));
+        }
+
+        /* Circular links panel */
+        .quick-links-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .quick-link-circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            border-radius: 50% !important;
+            border: 4.5px solid var(--dark-color) !important;
+            box-shadow: 6px 6px 0px var(--dark-color) !important;
+            font-weight: 800;
+            font-size: 1.05rem;
+            text-decoration: none;
+            text-align: center;
+            padding: 15px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .quick-link-circle:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 2px 2px 0px var(--dark-color) !important;
+            text-decoration: none;
+        }
+
+        .quick-link-circle.pink-bg { background-color: var(--pink-accent) !important; color: #ffffff !important; }
+        .quick-link-circle.yellow-bg { background-color: var(--secondary-color) !important; color: var(--dark-color) !important; }
+        .quick-link-circle.blue-bg { background-color: var(--accent-color) !important; color: #ffffff !important; }
+        .quick-link-circle.purple-bg { background-color: var(--purple-accent) !important; color: #ffffff !important; }
+
+        .quick-icon {
+            font-size: 3.2rem;
+            margin-bottom: 8px;
+            display: block;
+            line-height: 1;
+        }
+
+        /* Main Workspace Grid - Responsive Sidebars */
+        .homepage-layout-row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .homepage-main-col {
+            flex: 3;
+            min-width: 350px;
+        }
+
+        .homepage-sidebar-col {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Cartoon Card (Colorful warm yellow background) */
+        .cartoon-card {
+            background-color: #fffef2;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--cartoon-shadow);
+            padding: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* Wooden signboard heading */
+        .wooden-header {
+            background-color: #ffeed3;
+            border: 4.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            padding: 12px 30px;
+            box-shadow: 5px 5px 0px var(--dark-color);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .wooden-header h3 {
+            margin: 0;
+            color: #6e461a;
+            font-size: 1.65rem;
+            text-shadow: 1px 1px 0px #ffffff;
+        }
+
+        /* Progress Bar */
+        .ganesha-progress {
+            background-color: #fffef0;
+            border: 4px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            margin-bottom: 45px;
+            box-shadow: 5px 5px 0px var(--dark-color);
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-weight: 750;
+            font-size: 1.1rem;
+        }
+
+        .progress-track {
+            height: 28px;
+            background-color: #f3ecdb;
+            border: 3px solid var(--dark-color);
+            border-radius: 14px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 45%; /* Dynamic starting progress */
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color), var(--pink-accent));
+            border-radius: 11px;
+            position: relative;
+            transition: width 0.5s ease-out;
+        }
+
+        .progress-star {
+            position: absolute;
+            right: -12px;
+            top: -8px;
+            font-size: 1.6rem;
+        }
+
+        /* Course Quests cards grid */
+        .quests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .quest-card {
+            border: 4.5px solid var(--dark-color);
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            box-shadow: 6px 6px 0px var(--dark-color);
+            transition: all 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 230px;
+        }
+
+        .quest-card:hover {
+            box-shadow: 2px 2px 0px var(--dark-color);
+            transform: translate(3px, 3px);
+        }
+
+        .quest-category {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #555;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .quest-title {
+            font-size: 1.45rem;
+            color: var(--dark-color);
+            margin: 0 0 15px 0;
+            line-height: 1.3;
+        }
+
+        /* Gradients on cards bottom edge */
+        .quest-card.art {
+            background: linear-gradient(135deg, #fffcf5, #fff0f3);
+            border-bottom: 9px solid var(--pink-accent);
+        }
+        .quest-card.math {
+            background: linear-gradient(135deg, #fffcf5, #fff6eb);
+            border-bottom: 9px solid var(--primary-color);
+        }
+        .quest-card.science {
+            background: linear-gradient(135deg, #fffcf5, #f0faff);
+            border-bottom: 9px solid var(--accent-color);
+        }
+        .quest-card.writing {
+            background: linear-gradient(135deg, #fffcf5, #f3ebff);
+            border-bottom: 9px solid var(--purple-accent);
+            border-left: 8px solid var(--purple-accent);
+        }
+
+        /* Speech bubble owl fun fact widget */
+        .fact-bubble-widget {
+            background-color: #fff0f5;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--cartoon-shadow);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .fact-mascot {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+
+        .fact-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #554e45;
+            margin: 0;
+        }
+
+        /* Collectible star chest widget */
+        .treasure-chest-widget {
+            background-color: #e8f7ff;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--cartoon-shadow);
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            overflow: hidden;
+            transition: background-color 0.2s;
+        }
+
+        .treasure-chest-widget:hover {
+            background-color: #d6f0ff;
+        }
+
+        .treasure-chest-widget:hover .chest-icon {
+            transform: scale(1.15) rotate(-3deg);
+        }
+
+        .chest-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 10px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chest-label {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            color: var(--purple-accent);
+            margin-bottom: 6px;
+        }
+
+        .star-counter-bubble {
+            background-color: var(--secondary-color);
+            border: 2.5px solid var(--dark-color);
+            border-radius: 20px;
+            padding: 5px 15px;
+            display: inline-block;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 2px 2px 0px var(--dark-color);
+        }
+
+        /* Retro radio chiptunes melodies player widget */
+        .vintage-radio-widget {
+            background-color: #fff9e6;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--cartoon-shadow);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .radio-brand {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.1rem;
+            color: #b35900;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .radio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .radio-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2.5px solid var(--dark-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            background-color: #ffffff;
+            box-shadow: 2px 2px 0px var(--dark-color);
+            transition: all 0.1s;
+        }
+
+        .radio-btn:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--dark-color);
+        }
+
+        .radio-btn.active {
+            background-color: var(--success-color);
+            color: #ffffff;
+        }
+
+        /* ==========================================
+           INTERNAL COURSE VIEW WIDGETS
+           ========================================== */
+        
+        .ganesha-activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .activity-item-card {
+            border: 4.5px solid var(--dark-color) !important;
+            border-radius: var(--border-radius-md) !important;
+            box-shadow: 5px 5px 0px var(--dark-color) !important;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .activity-item-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0px var(--dark-color) !important;
+        }
+
+        /* Pastel activity skins to prevent white page space */
+        .activity-item-card.quiz {
+            background-color: #fffbeb;
+            border-left: 12px solid var(--secondary-color) !important;
+        }
+        .activity-item-card.assign {
+            background-color: #f0faff;
+            border-left: 12px solid var(--accent-color) !important;
+        }
+        .activity-item-card.forum {
+            background-color: #fff0f3;
+            border-left: 12px solid var(--pink-accent) !important;
+        }
+        .activity-item-card.resource {
+            background-color: #f0fdf4;
+            border-left: 12px solid var(--success-color) !important;
+        }
+
+        .activity-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .activity-badge {
+            font-size: 2rem;
+            width: 48px;
+            height: 48px;
+            background-color: #fffef0;
+            border: 2.5px solid var(--dark-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 0px var(--dark-color);
+        }
+
+        .activity-details h4 {
+            margin: 0 0 4px 0;
+            font-size: 1.25rem;
+            color: var(--dark-color);
+        }
+
+        .activity-details p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Tick completion bubbly sphere */
+        .completion-tick-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 3.5px solid var(--dark-color);
+            background-color: #fffdec;
+            box-shadow: 3px 3px 0px var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: transparent;
+            transition: all 0.2s ease;
+        }
+
+        .completion-tick-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .completion-tick-circle.checked {
+            background-color: var(--success-color);
+            color: #ffffff;
+        }
+
+        /* Collapsible Workbook Sidebar Tabs Mockup */
+        .workbook-nav-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .workbook-tab-link {
+            border: 2.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            padding: 12px 20px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--dark-color) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.15s ease;
+            box-shadow: 3px 3px 0px var(--dark-color);
+        }
+
+        .workbook-tab-link.pink-tab { background-color: #fff0f3; }
+        .workbook-tab-link.yellow-tab { background-color: #fffbeb; }
+        .workbook-tab-link.blue-tab { background-color: #f0faff; }
+        
+        .workbook-tab-link.active, .workbook-tab-link:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--dark-color);
+            background-color: var(--secondary-color) !important;
+        }
+
+        /* LOGIN TAB OVERLAYS */
+        .login-view-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .login-left {
+            flex: 1;
+            min-width: 350px;
+            background-color: #fff8eb;
+            border: 4px solid var(--dark-color);
+            border-radius: var(--border-radius-lg);
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: var(--cartoon-shadow);
+            position: relative;
+        }
+
+        .login-right {
+            flex: 1;
+            min-width: 350px;
+            padding: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 750;
+            font-size: 1.05rem;
+        }
+
+        .form-control {
+            width: 100%;
+            box-sizing: border-box;
+            border: 3.5px solid var(--dark-color);
+            border-radius: var(--border-radius-md);
+            padding: 15px;
+            font-size: 1.1rem;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            outline: none;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.05);
+            background-color: #fffef8;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 4px 4px 0px rgba(255, 126, 54, 0.15);
+        }
+
+        .ganesha-login-card {
+            background: #fffdf2; /* peach cream card instead of pure white */
+            border: 4px solid var(--dark-color);
+            border-radius: var(--border-radius-xl);
+            box-shadow: 8px 8px 0px var(--dark-color);
+            padding: 40px;
+            max-width: 950px;
+            width: 100%;
+            margin: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Stars & Twinkles */
+        .twinkle-star {
+            position: absolute;
+            font-size: 1.8rem;
+            pointer-events: none;
+        }
+
+        .star1 { top: 20px; left: 20px; }
+        .star2 { bottom: 25px; right: 30px; }
+
+        /* Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .preview-footer {
+            text-align: center;
+            padding: 40px;
+            background-color: #fff8eb;
+            border-top: 4px solid var(--dark-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas Confetti Overlay -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="preview-header">
+        <div class="brand">
+            👑 <span class="ganesha-brand-text">Ganesha Academy!</span>
+        </div>
+        <div class="navbar-buttons">
+            <button class="cartoon-btn btn-yellow sensory-toggle-btn" onclick="toggleSensoryMode(event)">
+                ✨ Sensory Cozy Mode
+            </button>
+        </div>
+    </header>
+
+    <!-- Controls Panel -->
+    <div class="mode-toggle-panel">
+        <div class="color-schemes-group">
+            🎨 <strong>Vibrant Color Schemes:</strong>
+            <button class="cartoon-btn btn-orange" onclick="changeThemeColor('#ff7e36', '#ff7e36')">Orange Burst</button>
+            <button class="cartoon-btn btn-pink" onclick="changeThemeColor('#ff758f', '#ff758f')">Strawberry Pink</button>
+            <button class="cartoon-btn btn-blue" onclick="changeThemeColor('#4bb3fd', '#4bb3fd')">Ocean Breeze</button>
+        </div>
+        
+        <!-- Font Size Group -->
+        <div class="font-size-group" style="display: flex; align-items: center; gap: 10px;">
+            🔍 <strong>Font Size:</strong>
+            <select id="preview-font-size" class="cartoon-btn btn-yellow" style="padding: 8px 15px; font-size: 1rem; border-radius: 12px; cursor: pointer; text-transform:none; box-shadow: 2px 2px 0px var(--dark-color) !important;" onchange="changeFontSize(this.value)">
+                <option value="14px">Small (14px)</option>
+                <option value="16px" selected>Standard Cozy (16px)</option>
+                <option value="18px">Playful Large (18px)</option>
+                <option value="20px">Super Kids (20px)</option>
+            </select>
+        </div>
+
+        <div style="font-weight: 700; color: #554e45;">
+            💥 Click any <strong>completeness bubble (◯)</strong> in the <strong>Course View</strong> tab to level up!
+        </div>
+    </div>
+
+
+    <!-- Main Workspace Container -->
+    <div class="preview-container">
+        
+        <!-- Tab selector -->
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab('frontpage-tab', this)">🌅 Adventure Frontpage</button>
+            <button class="tab-btn" onclick="switchTab('course-tab', this)">📚 Internal Course View</button>
+            <button class="tab-btn" onclick="switchTab('login-tab', this)">🔑 Magical Login Screen</button>
+        </div>
+
+        <!-- ==========================================
+             TAB 1: ADVENTURE HOMEPAGE (FULL WIDTH)
+             ========================================== -->
+        <div id="frontpage-tab" class="tab-content active">
+            
+            <!-- Hero Adventure Banner (occupies full screen width) -->
+            <div class="ganesha-hero-container floating-cloud">
+                <div class="hero-left">
+                    <h1 class="hero-title">Namaste, Adventurer!</h1>
+                    <p class="hero-subtitle">Every lesson is a magical stepping stone on your journey. What exciting quest will we explore today with our baby Ganesha buddy?</p>
+                    <button class="cartoon-btn btn-orange bouncy-hover" onclick="burstConfetti(event)">
+                        🚀 Start Learning!
+                    </button>
+                </div>
+                <div class="hero-right">
+                    <div class="floating-mascot">
+                        <img src="pix/ganesha_hero.png" alt="Baby Ganesha" class="mascot-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-row">
+                <div class="quick-link-circle pink-bg" onclick="burstConfetti(event)">
+                    <span class="quick-icon">🎒</span>
+                    <span>My Quests</span>
+                </div>
+                <div class="quick-link-circle yellow-bg" onclick="burstConfetti(event)">
+                    <span class="quick-icon">👑</span>
+                    <span>My Badges</span>
+                </div>
+                <div class="quick-link-circle blue-bg" onclick="burstConfetti(event)">
+                    <span class="quick-icon">☁️</span>
+                    <span>Calendar</span>
+                </div>
+                <div class="quick-link-circle purple-bg" onclick="burstConfetti(event)">
+                    <span class="quick-icon">⭐</span>
+                    <span>Star Scores</span>
+                </div>
+            </div>
+
+            <hr style="border: 2px dashed var(--dark-color); margin-bottom: 40px;">
+
+            <!-- Main Layout Row - Sidebar and Central content -->
+            <div class="homepage-layout-row">
+                
+                <!-- Main Content (Quests) -->
+                <div class="homepage-main-col">
+                    
+                    <div class="ganesha-progress">
+                        <div class="progress-label">
+                            <span>🦁 Adventure Score: <span id="adventure-progress-percent">45%</span> Done!</span>
+                            <span>Level Up Soon! 🏆</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="main-progress-fill" style="width: 45%;">
+                                <span class="progress-star pulse-star">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="wooden-header floating-cloud">
+                        <h3>📚 Today's Active Quests</h3>
+                    </div>
+
+                    <!-- Quests Grid -->
+                    <div class="quests-grid">
+                        <!-- Quest 1 -->
+                        <div class="quest-card art">
+                            <span class="twinkle-star star1 pulse-star">🎨</span>
+                            <div>
+                                <div class="quest-category">Creative Arts</div>
+                                <h4 class="quest-title">Drawing Cartoon Animals!</h4>
+                            </div>
+                            <button class="cartoon-btn btn-pink bouncy-hover" onclick="completeQuest(event, this)">
+                                Complete! 🦄
+                            </button>
+                        </div>
+
+                        <!-- Quest 2 -->
+                        <div class="quest-card math">
+                            <span class="twinkle-star star1 pulse-star">✏️</span>
+                            <div>
+                                <div class="quest-category">Mathematics</div>
+                                <h4 class="quest-title">Magical Addition & Subtraction!</h4>
+                            </div>
+                            <button class="cartoon-btn btn-orange bouncy-hover" onclick="completeQuest(event, this)">
+                                Complete! 🔢
+                            </button>
+                        </div>
+
+                        <!-- Quest 3 -->
+                        <div class="quest-card science">
+                            <span class="twinkle-star star1 pulse-star">🚀</span>
+                            <div>
+                                <div class="quest-category">Science</div>
+                                <h4 class="quest-title">Explore the Solar System!</h4>
+                            </div>
+                            <button class="cartoon-btn btn-blue bouncy-hover" onclick="completeQuest(event, this)">
+                                Complete! 🪐
+                            </button>
+                        </div>
+
+                        <!-- Quest 4 -->
+                        <div class="quest-card writing">
+                            <span class="twinkle-star star1 pulse-star">✍️</span>
+                            <div>
+                                <div class="quest-category">Creative Writing</div>
+                                <h4 class="quest-title">Crafting Magical Stories!</h4>
+                            </div>
+                            <button class="cartoon-btn btn-orange bouncy-hover" style="background-color: var(--purple-accent); color:#ffffff;" onclick="completeQuest(event, this)">
+                                Complete! 📖
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Col - Engaging Widgets -->
+                <div class="homepage-sidebar-col">
+                    
+                    <!-- Star Treasure Collector -->
+                    <div class="treasure-chest-widget" onclick="collectStar(event)">
+                        <span class="chest-icon">📦</span>
+                        <div class="chest-label">Treasure Collector</div>
+                        <div class="star-counter-bubble">⭐ <span id="star-count">0</span> Collected</div>
+                        <p style="font-size: 0.8rem; margin: 10px 0 0 0; color:#555;">Click chest to collect daily gold stars!</p>
+                    </div>
+
+                    <!-- Speech Owl fact bubble -->
+                    <div class="fact-bubble-widget floating-cloud">
+                        <span class="fact-mascot">🦉</span>
+                        <div class="fact-text">
+                            <strong>Did you know?</strong> An elephant's trunk has over <strong>40,000 muscles</strong>! That's why Ganesha is so super strong!
+                        </div>
+                    </div>
+
+                    <!-- Vintage Melody Radio player -->
+                    <div class="vintage-radio-widget">
+                        <div class="radio-brand">📻 Retro Chiptune Radio</div>
+                        <div class="radio-controls">
+                            <div class="radio-btn" title="Upbeat Chiptune" onclick="toggleRadioBtn(event, this)">🎵</div>
+                            <div class="radio-btn" title="Classroom Bells" onclick="toggleRadioBtn(event, this)">🔔</div>
+                            <div class="radio-btn" title="Sparkle Sounds" onclick="toggleRadioBtn(event, this)">✨</div>
+                        </div>
+                        <p style="font-size: 0.8rem; margin: 8px 0 0 0; color:#666;">Mock play your daily learning music!</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             TAB 2: INTERNAL LESSONS COURSE VIEW (NEW OVERHAUL)
+             ========================================== -->
+        <div id="course-tab" class="tab-content">
+            
+            <div class="homepage-layout-row">
+                
+                <!-- Main Activity View -->
+                <div class="homepage-main-col">
+                    
+                    <!-- Gamified Course progress track -->
+                    <div class="ganesha-progress">
+                        <div class="progress-label">
+                            <span>🗺️ Quest Path Completion: <span id="lesson-progress-percent">45%</span> Completed</span>
+                            <span style="color: var(--pink-accent)">Hooray! Sparkles unlocked! 💫</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="lesson-progress-fill" style="width: 45%;">
+                                <span class="progress-star pulse-star">⭐</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wooden Board Course Heading -->
+                    <div class="wooden-header floating-cloud">
+                        <h3>🌳 Topic 1: Magical Forest Adventures</h3>
+                    </div>
+                    <p style="margin:-10px 0 25px 0; color:#666; font-size:1rem;">Follow Ganesha through the forest path! Complete each activity box below and hit the tick circles to score points.</p>
+
+                    <!-- Colorful activity cards - NO WHITE PAGE SPACE -->
+                    <div class="ganesha-activity-list">
+                        
+                        <!-- Activity Card 1: Forum (Strawberry Pink) -->
+                        <div class="activity-item-card forum">
+                            <div class="activity-left">
+                                <div class="activity-badge">💬</div>
+                                <div class="activity-details">
+                                    <h4>Quest Forum: Meet Your Magic Animal!</h4>
+                                    <p>Tell the class which forest helper animal you want to join your learning camp today!</p>
+                                </div>
+                            </div>
+                            <div class="completion-tick-circle checked" onclick="toggleCompletionTick(event, this)">✓</div>
+                        </div>
+
+                        <!-- Activity Card 2: Assignment (Ocean Blue) -->
+                        <div class="activity-item-card assign">
+                            <div class="activity-left">
+                                <div class="activity-badge">📝</div>
+                                <div class="activity-details">
+                                    <h4>Creative Task: Sketch Your Companion Mouse!</h4>
+                                    <p>Draw Mushika holding a notebook and upload a snapshot of your K-12 artwork.</p>
+                                </div>
+                            </div>
+                            <div class="completion-tick-circle checked" onclick="toggleCompletionTick(event, this)">✓</div>
+                        </div>
+
+                        <!-- Activity Card 3: Quiz (Sunshine Yellow) -->
+                        <div class="activity-item-card quiz">
+                            <div class="activity-left">
+                                <div class="activity-badge">⭐</div>
+                                <div class="activity-details">
+                                    <h4>Math Quest: Addition Riddle Challenge</h4>
+                                    <p>Help baby Ganesha solve the additions of magic acorns. 3 acorns + 4 acorns = ?</p>
+                                </div>
+                            </div>
+                            <div class="completion-tick-circle" onclick="toggleCompletionTick(event, this)">✓</div>
+                        </div>
+
+                        <!-- Activity Card 4: Page Resource (Lime Green) -->
+                        <div class="activity-item-card resource">
+                            <div class="activity-left">
+                                <div class="activity-badge">📖</div>
+                                <div class="activity-details">
+                                    <h4>Camp Guide: Forest Navigation Maps</h4>
+                                    <p>Read Ganesha's guide on how to read forest maps and compass directions.</p>
+                                </div>
+                            </div>
+                            <div class="completion-tick-circle" onclick="toggleCompletionTick(event, this)">✓</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Workbook collapsible tabs -->
+                <div class="homepage-sidebar-col">
+                    
+                    <div class="cartoon-card" style="margin-bottom:0;">
+                        <h4 style="font-family:'Fredoka'; color: var(--primary-color); margin-top:0;">🗺️ Binder Map</h4>
+                        
+                        <div class="workbook-nav-tabs">
+                            <a href="#" class="workbook-tab-link pink-tab active">
+                                <span>🌈 Topic 1: Forest</span>
+                            </a>
+                            <a href="#" class="workbook-tab-link yellow-tab">
+                                <span>🪐 Topic 2: Planets</span>
+                            </a>
+                            <a href="#" class="workbook-tab-link blue-tab">
+                                <span>🧬 Topic 3: Volcanoes</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Corkboard styled quick tip -->
+                    <div class="fact-bubble-widget" style="background-color:#eefcf2;">
+                        <span class="fact-mascot">🏆</span>
+                        <div class="fact-text">
+                            <strong>Study Tip:</strong> Complete tasks every day to unlock **shiny badges**! Ganesha is super proud of you!
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==========================================
+             TAB 3: MAGICAL LOGIN SCREEN
+             ========================================== -->
+        <div id="login-tab" class="tab-content">
+            
+            <div class="login-view-container">
+                <!-- Mascot Column -->
+                <div class="login-left">
+                    <span class="twinkle-star star1 pulse-star">✨</span>
+                    <span class="twinkle-star star2 pulse-star">🎈</span>
+                    
+                    <img id="login-mascot-img" src="pix/ganesha_login.png" alt="Happy Ganesha" class="mascot-img floating-mascot" style="transition: transform 0.3s;">
+                    
+                    <h3 style="color: var(--primary-color); margin-top: 25px;">Study Buddy Ganesha</h3>
+                    <p style="font-size: 0.95rem; color: #666; max-width: 280px;">Focus on the secret passcode input to see Ganesha get playfully shy!</p>
+                </div>
+
+                <!-- Form Column -->
+                <div class="login-right">
+                    <div style="font-family:'Fredoka'; font-size:2.8rem; color: var(--primary-color); margin-bottom: 25px; text-shadow:2px 2px 0 var(--dark-color); display:flex; gap:10px; align-items:center; justify-content:center;">
+                        🐘 <span>Ganesha Academy</span>
+                    </div>
+                    
+                    <div class="ganesha-login-card" style="margin-bottom:0;">
+                        <div class="form-group">
+                            <label for="usr">Magic Username:</label>
+                            <input type="text" id="usr" class="form-control" placeholder="Enter your hero name...">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pwd">Secret Passcode:</label>
+                            <input type="password" id="pwd" class="form-control" placeholder="Type secret code..." onfocus="mascotCoverEyes()" onblur="mascotUncoverEyes()">
+                        </div>
+
+                        <button class="cartoon-btn btn-orange w-100 bouncy-hover" style="display:block; width:100%; text-align:center; padding:15px; font-size: 1.15rem;" onclick="burstConfetti(event)">
+                            Let's Begin! 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="preview-footer">
+        🙏 Theme Ganesha - K-12 Gamified Learning Adventures! 🐘
+    </footer>
+
+    <!-- Interactive scripts -->
+    <script>
+        // Confetti Canvas Particle System
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let confettiActive = false;
+        const colors = ['#ff7e36', '#ffc83b', '#4bb3fd', '#ff758f', '#51cb82', '#b5179e'];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function spawnConfetti(x, y) {
+            const count = 55;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    size: Math.random() * 8 + 6,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speedX: (Math.random() - 0.5) * 12,
+                    speedY: (Math.random() - 0.5) * 12 - 5,
+                    gravity: 0.25,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    opacity: 1
+                });
+            }
+            if (!confettiActive) {
+                confettiActive = true;
+                animateConfetti();
+            }
+        }
+
+        function animateConfetti() {
+            if (particles.length === 0) {
+                confettiActive = false;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.speedY += p.gravity;
+                p.rotation += p.rotationSpeed;
+                p.opacity -= 0.015;
+
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.globalAlpha = p.opacity;
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+
+                if (p.opacity <= 0 || p.y > canvas.height) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animateConfetti);
+        }
+
+        function burstConfetti(e) {
+            spawnConfetti(e.clientX, e.clientY);
+        }
+
+        // Star Counter Chest Clicker
+        let starCounter = 0;
+        function collectStar(e) {
+            starCounter++;
+            document.getElementById('star-count').innerText = starCounter;
+            
+            // Spawn confetti at chest
+            spawnConfetti(e.clientX, e.clientY);
+            
+            // Chest Bubbly Icon scale bounce
+            let chest = document.querySelector('.chest-icon');
+            chest.innerText = '🔓';
+            chest.style.transform = 'scale(1.3) rotate(5deg)';
+            
+            setTimeout(() => {
+                chest.innerText = '📦';
+                chest.style.transform = '';
+            }, 300);
+        }
+
+        // Toggle Melody Radio Buttons
+        function toggleRadioBtn(e, btn) {
+            spawnConfetti(e.clientX, e.clientY);
+            let active = btn.classList.contains('active');
+            
+            // Disable all radio buttons
+            document.querySelectorAll('.radio-btn').forEach(b => b.classList.remove('active'));
+            
+            if (!active) {
+                btn.classList.add('active');
+            }
+        }
+
+        // Complete Quest Trigger (Homepage Quests)
+        function completeQuest(e, btn) {
+            spawnConfetti(e.clientX, e.clientY);
+            if (btn.innerText.includes('Complete')) {
+                btn.innerText = 'Completed! 🏆';
+                btn.style.backgroundColor = 'var(--success-color)';
+                btn.style.color = '#ffffff';
+                
+                // Adjust progress bar
+                let fill = document.getElementById('main-progress-fill');
+                let currentWidth = parseInt(fill.style.width || '45');
+                if (currentWidth < 100) {
+                    let newWidth = Math.min(currentWidth + 10, 100);
+                    fill.style.width = newWidth + '%';
+                    document.getElementById('adventure-progress-percent').innerText = `${newWidth}%`;
+                }
+            } else {
+                btn.innerText = 'Complete!';
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }
+        }
+
+        // Completion Ticks (Internal Lesson Page Activities)
+        function toggleCompletionTick(e, tick) {
+            spawnConfetti(e.clientX, e.clientY);
+            
+            let checked = tick.classList.contains('checked');
+            let fill = document.getElementById('lesson-progress-fill');
+            let currentWidth = parseInt(fill.style.width || '45');
+            
+            if (checked) {
+                tick.classList.remove('checked');
+                tick.innerText = '';
+                let newWidth = Math.max(currentWidth - 15, 0);
+                fill.style.width = newWidth + '%';
+                document.getElementById('lesson-progress-percent').innerText = `${newWidth}%`;
+            } else {
+                tick.classList.add('checked');
+                tick.innerText = '✓';
+                let newWidth = Math.min(currentWidth + 15, 100);
+                fill.style.width = newWidth + '%';
+                document.getElementById('lesson-progress-percent').innerText = `${newWidth}%`;
+            }
+        }
+
+        // Change Colors Scheme
+        function changeThemeColor(primary, accent) {
+            document.documentElement.style.setProperty('--primary-color', primary);
+            document.documentElement.style.setProperty('--accent-color', accent);
+        }
+
+        // Toggle Sensory Mode
+        function toggleSensoryMode(e) {
+            let body = document.body;
+            let btn = e.currentTarget;
+            if (body.classList.contains('sensory-cozy')) {
+                body.classList.remove('sensory-cozy');
+                btn.innerText = '✨ Sensory Cozy Mode';
+                btn.style.backgroundColor = 'var(--secondary-color)';
+                btn.style.color = 'var(--dark-color)';
+                spawnConfetti(e.clientX, e.clientY);
+            } else {
+                body.classList.add('sensory-cozy');
+                btn.innerText = '🌸 Enable Sparkles';
+                btn.style.backgroundColor = '#f1ebd9';
+                btn.style.color = '#555';
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        // Password peek-a-boo mascot swap
+        const loginMascot = document.getElementById('login-mascot-img');
+        function mascotCoverEyes() {
+            loginMascot.src = 'pix/ganesha_hero.png';
+            loginMascot.style.transform = 'scale(1.1) translateY(-10px)';
+            loginMascot.style.filter = 'drop-shadow(6px 6px 0px rgba(255, 126, 54, 0.2))';
+        }
+
+        function mascotUncoverEyes() {
+            loginMascot.src = 'pix/ganesha_login.png';
+            loginMascot.style.transform = 'scale(1) translateY(0px)';
+            loginMascot.style.filter = '';
+        }
+
+        // Real-time Font Size Changer
+        function changeFontSize(size) {
+            document.documentElement.style.fontSize = size;
+        }
+    </script>
+</body>
+</html>

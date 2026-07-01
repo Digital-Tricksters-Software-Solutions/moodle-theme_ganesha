@@ -1,0 +1,201 @@
+{{!
+    Ganesha Frontpage Mustache Template.
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+
+{{{ output.standard_top_of_body_html }}}
+
+<div id="page-wrapper">
+
+    <!-- 1. Playful Navigation Header -->
+    {{> theme_boost/navbar }}
+
+    <!-- Main Content Container with padding for Fixed Navbar -->
+    <div class="container-fluid" style="margin-top: 100px; padding-bottom: 50px;">
+        
+        <!-- 2. Spectacular Custom Welcome Banner -->
+        <div class="ganesha-hero-container floating-cloud">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">{{#str}} herotitle, theme_ganesha {{/str}}</h1>
+                    <p class="hero-subtitle">{{#str}} herosubtitle, theme_ganesha {{/str}}</p>
+                    
+                    {{^isloggedin}}
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                        <a href="{{{ config.wwwroot }}}/login/index.php" class="btn btn-adventure-primary btn-lg bouncy-hover cartoon-btn text-white mr-3 mb-2">
+                            🚀 Start My Adventure! (Log In)
+                        </a>
+                        <a href="{{{ config.wwwroot }}}/login/signup.php" class="btn btn-adventure-secondary btn-lg bouncy-hover cartoon-btn mb-2">
+                            ✨ Join the Quest! (Register)
+                        </a>
+                    </div>
+                    {{/isloggedin}}
+                    
+                    {{#isloggedin}}
+                    <div class="d-flex flex-wrap gap-3 mt-3">
+                        <a href="#quests" class="btn btn-adventure-primary btn-lg bouncy-hover cartoon-btn text-white mr-3 mb-2">
+                            🚀 {{#str}} startquest, theme_ganesha {{/str}}
+                        </a>
+                        <a href="{{{ config.wwwroot }}}/my/" class="btn btn-adventure-secondary btn-lg bouncy-hover cartoon-btn mr-3 mb-2">
+                            🎒 Go to My Dashboard!
+                        </a>
+                        {{#isadmin}}
+                        <a href="{{{ config.wwwroot }}}/admin/" class="btn btn-adventure-accent btn-lg bouncy-hover cartoon-btn text-white mb-2">
+                            ⚙️ Site Administration
+                        </a>
+                        {{/isadmin}}
+                    </div>
+                    {{/isloggedin}}
+                </div>
+                <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div class="mascot-image-wrapper floating-mascot">
+                        <!-- References the custom Ganesha hero image -->
+                        <img src="{{{ config.wwwroot }}}/theme/ganesha/pix/ganesha_hero.png" alt="Ganesha Mascot" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Bubbly Quick Links Panel -->
+        <div class="row justify-content-center gap-4 mb-5 ganesha-quick-links" style="display:flex; flex-wrap:wrap; justify-content:center; gap: 20px;">
+            <a href="{{{ config.wwwroot }}}/my/" class="quick-link-circle pink-bg bouncy-hover">
+                <span class="quick-icon">🎒</span>
+                <span>My Quests</span>
+            </a>
+            <a href="{{{ config.wwwroot }}}/badges/mybadges.php" class="quick-link-circle yellow-bg bouncy-hover">
+                <span class="quick-icon">👑</span>
+                <span>My Badges</span>
+            </a>
+            <a href="{{{ config.wwwroot }}}/calendar/view.php" class="quick-link-circle blue-bg bouncy-hover">
+                <span class="quick-icon">☁️</span>
+                <span>Calendar</span>
+            </a>
+            <a href="{{{ config.wwwroot }}}/grade/report/overview/index.php" class="quick-link-circle purple-bg bouncy-hover">
+                <span class="quick-icon">⭐</span>
+                <span>Star Scores</span>
+            </a>
+            {{#isadmin}}
+            <a href="{{{ config.wwwroot }}}/admin/" class="quick-link-circle green-bg bouncy-hover">
+                <span class="quick-icon">⚙️</span>
+                <span>Admin settings</span>
+            </a>
+            {{/isadmin}}
+        </div>
+
+        <!-- 4. Interactive Learning Quests Section -->
+        <div class="row" id="quests">
+            <div class="col-md-9">
+                <!-- Custom Wooden Heading Banner -->
+                <div class="course-section-header floating-cloud ganesha-quests-header">
+                    <h3>📚 {{#str}} myquests, theme_ganesha {{/str}}</h3>
+                </div>
+
+                <!-- Interactive Progress Path at the top of the course -->
+                <div class="ganesha-progress-container mb-4">
+                    <div class="progress-track-label">
+                        <span>🦁 Ganesha's Quest Progress:</span>
+                        <span>Ready to Excel!</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <!-- Main Moodle content area (renders actual courses / dashboard blocks) -->
+                <div class="ganesha-main-content">
+                    {{{ output.main_content }}}
+                </div>
+            </div>
+
+            <!-- Sidebar region for Moodle blocks (styled like cozy wooden bulletin boards) -->
+            <div class="col-md-3 mt-4 mt-md-0 ganesha-sidebar-col">
+                
+                <!-- Star Treasure Collector Chest Widget -->
+                <div class="treasure-chest-widget bouncy-hover" onclick="if(window.GaneshaConfetti) window.GaneshaConfetti.spawn(event.clientX, event.clientY); var c=document.getElementById('star-count-moodle'); if(c) c.innerText=parseInt(c.innerText)+1; let ch=this.querySelector('.chest-icon'); ch.innerText='🔓'; ch.style.transform='scale(1.2) rotate(5deg)'; setTimeout(()=>{ch.innerText='📦'; ch.style.transform='';},300);">
+                    <span class="chest-icon" style="display:block; font-size:3.5rem; transition:transform 0.2s;">📦</span>
+                    <div class="chest-label" style="font-family:'Fredoka'; font-weight:700; color:#b5179e; font-size:1.1rem; margin-top:5px;">Treasure Collector</div>
+                    <div class="star-counter-bubble" style="margin-top:5px;">⭐ <span id="star-count-moodle">0</span> Collected</div>
+                </div>
+
+                <!-- Interactive Sky Weather Board Widget -->
+                <div class="vintage-radio-widget sky-selector-widget mt-4">
+                    <div class="radio-brand" style="font-family:'Fredoka'; font-size:1rem; color:#4bb3fd; margin-bottom:10px;">{{{ weatherlabel }}}</div>
+                    <div style="font-size:0.85rem; font-weight:700; color:#554e45; margin-bottom:10px;">{{{ weathersubtitle }}}</div>
+                    <div class="radio-controls" style="display:flex; justify-content:center; gap:10px;">
+                        <div class="radio-btn active" onclick="if(window.GaneshaSky) window.GaneshaSky.setTheme('sunny', this);" title="Sunny Sky">☀️</div>
+                        <div class="radio-btn" onclick="if(window.GaneshaSky) window.GaneshaSky.setTheme('rainbow', this); if(window.GaneshaConfetti) window.GaneshaConfetti.spawn(event.clientX, event.clientY);" title="Rainbow Sky">🌈</div>
+                        <div class="radio-btn" onclick="if(window.GaneshaSky) window.GaneshaSky.setTheme('starry', this);" title="Twinkling Starry Night">🌙</div>
+                    </div>
+                </div>
+
+                <!-- Interactive Daily Reward Scratch Card Widget -->
+                <div class="treasure-chest-widget scratcher-widget mt-4" style="cursor: default;">
+                    <div class="chest-label" style="font-family:'Fredoka'; font-size:1.05rem; color:#ff758f; margin-bottom:8px; text-align:center;">{{{ scratchtitle }}}</div>
+                    <div style="font-size:0.8rem; font-weight:700; color:#554e45; margin-bottom:12px; text-align:center; line-height:1.3;">{{{ scratchsubtitle }}}</div>
+                    <div style="position:relative; width:160px; height:80px; margin:0 auto; border:3px solid #332d27; border-radius:12px; overflow:hidden; background:#fffbf0; box-shadow:inset 2px 2px 5px rgba(0,0,0,0.05);">
+                        <!-- Hidden prize sticker behind scratch card -->
+                        <div class="scratch-prize-label" style="position:absolute; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:'Fredoka'; font-size:1.6rem; font-weight:800; color:#ff7e36; left:0; top:0;">
+                            <span id="scratch-sticker-emoji" style="font-size:2.2rem;">🏆</span>
+                            <span style="font-size:0.75rem; margin-top:2px;">SUPER STAR!</span>
+                        </div>
+                        <!-- Scratch Canvas overlay -->
+                        <canvas id="scratch-canvas" width="160" height="80" style="position:absolute; top:0; left:0; cursor:crosshair; width:160px; height:80px; z-index:2;"></canvas>
+                    </div>
+                    <button class="btn btn-adventure-primary btn-sm mt-3" style="font-size:0.8rem; padding:6px 14px !important;" onclick="if(window.GaneshaScratch) window.GaneshaScratch.reset();">{{{ scratchresetbtn }}}</button>
+                </div>
+
+                <!-- Ganesha's Virtual Pet Feeder (Sweet Shop) Widget -->
+                <div class="treasure-chest-widget modak-feeder-widget mt-4" style="background-color: #fff8eb; cursor: default;">
+                    <span class="modak-mascot" style="display:block; font-size:3.5rem; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;" onclick="if(window.GaneshaPet) window.GaneshaPet.feed(event);" title="Click to tickle Ganesha's trunk!">🐘</span>
+                    <div class="chest-label" style="font-family:'Fredoka'; font-weight:700; color:#ff758f; font-size:1.1rem; margin-top:5px;">{{{ pettitle }}}</div>
+                    <div style="font-size:0.8rem; font-weight:700; color:#554e45; margin-bottom:12px; text-align:center;">{{{ petdesc }}}</div>
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <button class="btn btn-adventure-primary btn-sm" style="font-size:0.8rem; padding:6px 14px !important;" onclick="if(window.GaneshaPet) window.GaneshaPet.feed(event);">{{{ petfeedbtn }}}</button>
+                    </div>
+                    <div class="star-counter-bubble" style="background-color:#ff758f; color:#ffffff;">❤️ Friendship Lv. <span id="buddy-level">1</span> (<span id="buddy-exp">0</span>/5)</div>
+                    <div id="pet-speech-bubble" style="margin-top:12px; font-size:0.85rem; font-weight:700; color:#b5179e; min-height:22px; line-height:1.3;">"Hello friend! Let's study together today!"</div>
+                </div>
+
+                <!-- Speech Owl fact bubble Widget -->
+                <div class="fact-bubble-widget floating-cloud mt-4" style="cursor: pointer;" onclick="if(window.GaneshaOwl) window.GaneshaOwl.cycleFact(event);" title="Click to flip & hear a fact!">
+                    <span class="fact-mascot" style="font-size:2.5rem; display:block; transition: transform 0.3s;">🦉</span>
+                    <div class="fact-text" style="font-size:0.9rem; line-height:1.4; color:#554e45;">
+                        <strong>Did you know?</strong> An elephant's trunk has over <strong>40,000 muscles</strong>! That's why Ganesha is so super strong!
+                    </div>
+                </div>
+
+                <!-- Vintage Melody Radio player Widget -->
+                <div class="vintage-radio-widget mt-4">
+                    <div class="radio-brand" style="font-family:'Fredoka'; font-size:1rem; color:#b35900; margin-bottom:10px;">📻 Chiptune Radio</div>
+                    <div class="radio-controls" style="display:flex; justify-content:center; gap:10px;">
+                        <div class="radio-btn" style="width:32px; height:32px; border-radius:50%; border:2px solid #332d27; display:flex; align-items:center; justify-content:center; background:#fff; cursor:pointer;" onclick="if(window.GaneshaChiptune) window.GaneshaChiptune.toggleChannel('melody', this);" title="Adventure Melody Loop">🎵</div>
+                        <div class="radio-btn" style="width:32px; height:32px; border-radius:50%; border:2px solid #332d27; display:flex; align-items:center; justify-content:center; background:#fff; cursor:pointer;" onclick="if(window.GaneshaChiptune) window.GaneshaChiptune.toggleChannel('chime', this);" title="Cozy Lullaby Chimes">🔔</div>
+                        <div class="radio-btn" style="width:32px; height:32px; border-radius:50%; border:2px solid #332d27; display:flex; align-items:center; justify-content:center; background:#fff; cursor:pointer;" onclick="if(window.GaneshaChiptune) window.GaneshaChiptune.toggleChannel('sparkle', this); if(window.GaneshaConfetti) window.GaneshaConfetti.spawn(event.clientX, event.clientY);" title="Star Success Fanfare">✨</div>
+                    </div>
+                </div>
+
+                <div class="theme-block-region mt-4">
+                    {{{ output.blocks_side_pre }}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 5. Cute Cartoon Footer -->
+    <footer class="text-center py-4 mt-5" style="background-color: #fff8eb; border-top: 4px solid #332d27;">
+        <p class="mb-1" style="font-weight: 700; color: #554e45;">
+            🙏 Made with love for little creators. Theme Ganesha 🐘
+        </p>
+        <p class="text-muted small mb-0">
+            {{{ footertext }}}
+        </p>
+    </footer>
+</div>
+
+{{{ output.standard_end_of_body_html }}}
+
+</body>
+</html>
