@@ -90,7 +90,7 @@ All parameters can be modified via **Site Administration ➔ Appearance ➔ Them
 | `logo` | File Manager| Custom header brand logo (replaces site name text). |
 | `heroimage` | File Manager| Custom mascot image for the homepage adventure banner. |
 | `loginimage` | File Manager| Custom mascot image for the login page card. |
-| `footertext` | Text area | Text displayed in the footer. Default is "Powered by Suman Kumar Das and Digital Tricksters". |
+| `footertext` | Text area | Text displayed in the footer. Default is "Powered by Suman Kumar Das and Digital Tricksters and Digital Tricksters Temp". |
 | `scratchrewards`| Text area | Comma-separated sticker rewards database (e.g. `🏆 SUPER STAR!,🚀 SPACE EXPLORER`). |
 | `owltrivia` | Text area | Newline-separated list of educational trivia facts for the owl widget. |
 | `petspeeches` | Text area | Newline-separated lists of baby Ganesha pet responses. |
