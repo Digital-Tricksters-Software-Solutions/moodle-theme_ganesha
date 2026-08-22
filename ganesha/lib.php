@@ -5,6 +5,22 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Ganesha theme helper functions and hooks library.
+ *
+ * @package     theme_ganesha
+ * @copyright   2026 Ganesha Theme
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -95,8 +111,7 @@ function theme_ganesha_page_init(moodle_page $page) {
     // Add custom K-12 assets, Google fonts, and playful favicon.
     $page->requires->css(new moodle_url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap'));
     
-    // Inject custom vanilla non-AMD JavaScript for playful interactions (like confetti and sensory toggle).
-    $page->requires->js(new moodle_url($CFG->wwwroot . '/theme/ganesha/javascript/interactions.js'));
+
 
     // Fetch theme visibility and font size settings and apply via CSS injection.
     $showquicklinks = get_config('theme_ganesha', 'showquicklinks');
@@ -117,39 +132,29 @@ function theme_ganesha_page_init(moodle_page $page) {
     }
 
     // Dynamic brand text, logo, welcome text, and mascot image injection from site administration settings.
-    $sitename = get_config('theme_ganesha', 'sitename') ?: 'Ganesha Academy';
+    if (!function_exists('theme_ganesha_get_default_string')) {
+        /**
+         * Helper to fetch a default language string if it exists in cache, avoiding debugging alerts on fresh installs.
+         */
+        function theme_ganesha_get_default_string($identifier, $fallback) {
+            if (get_string_manager()->string_exists($identifier, 'theme_ganesha')) {
+                return get_string($identifier, 'theme_ganesha');
+            }
+            return $fallback;
+        }
+    }
+
+    $sitename = get_config('theme_ganesha', 'sitename') ?: theme_ganesha_get_default_string('sitename_default', 'Ganesha Academy');
     $herotitle = get_config('theme_ganesha', 'herotitle');
     $herosubtitle = get_config('theme_ganesha', 'herosubtitle');
     $questheading = get_config('theme_ganesha', 'questheading');
 
     // Fetch lists from Ganesha theme admin config and pass to Javascript dynamically
-    $scratchrewards = get_config('theme_ganesha', 'scratchrewards') ?: '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD';
-    $owltrivia = get_config('theme_ganesha', 'owltrivia');
-    if (empty($owltrivia)) {
-        $owltrivia = "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!\n" .
-                     "Did you know? Honey never spoils! You could eat 3000-year-old honey!\n" .
-                     "Did you know? Bananas are berries, but strawberries aren't!\n" .
-                     "Did you know? Wombat poop is cube-shaped! This stops it from rolling away!\n" .
-                     "Did you know? A day on Venus is longer than a year on Venus!\n" .
-                     "Did you know? Cows have best friends and get stressed when they are separated!\n" .
-                     "Did you know? Octopuses have three hearts and blue blood!\n" .
-                     "Did you know? Sea otters hold hands while sleeping so they don't drift apart!\n" .
-                     "Did you know? Sloths can hold their breath longer than dolphins can!\n" .
-                     "Did you know? Dolphins sleep with one eye open to watch for sharks!";
-    }
-    $petspeeches = get_config('theme_ganesha', 'petspeeches');
-    if (empty($petspeeches)) {
-        $petspeeches = "Hello friend! Let's study together today!\n" .
-                       "Yum! That Modak was delicious! Thank you! 🍬\n" .
-                       "Ooh, that tickles my trunk! Hahaha!\n" .
-                       "Friendship level up! We are best friends now! 🐘❤️\n" .
-                       "Are you ready for your next study quest? Let's go!\n" .
-                       "Wow! You are feeding me so many delicious treats!\n" .
-                       "Learning is a super fun adventure with you!\n" .
-                       "You are the smartest adventurer in the kingdom!";
-    }
-    $owlmascot = get_config('theme_ganesha', 'owlmascot') ?: '🦉';
-    $petmascot = get_config('theme_ganesha', 'petmascot') ?: '🐘';
+    $scratchrewards = get_config('theme_ganesha', 'scratchrewards') ?: theme_ganesha_get_default_string('scratchrewards_default', '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD');
+    $owltrivia = get_config('theme_ganesha', 'owltrivia') ?: theme_ganesha_get_default_string('owltrivia_default', "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!");
+    $petspeeches = get_config('theme_ganesha', 'petspeeches') ?: theme_ganesha_get_default_string('petspeeches_default', "Hello friend! Let's study together today!");
+    $owlmascot = get_config('theme_ganesha', 'owlmascot') ?: theme_ganesha_get_default_string('owlmascot_default', '🦉');
+    $petmascot = get_config('theme_ganesha', 'petmascot') ?: theme_ganesha_get_default_string('petmascot_default', '🐘');
 
     // Retrieve uploaded stored files via Moodle's native theme file serving API.
     $customlogo = $page->theme->setting_file_url('logo', 'logo');
@@ -173,6 +178,7 @@ function theme_ganesha_page_init(moodle_page $page) {
     }
 
     // 1. Logo & Site Name Branding
+    $js .= "var brandAnchors = document.querySelectorAll('.navbar-brand'); brandAnchors.forEach(function(el) { el.setAttribute('href', " . json_encode($CFG->wwwroot . '/index.php') . "); }); ";
     if (!empty($customlogo)) {
         $js .= "var b = document.querySelectorAll('.navbar-brand'); b.forEach(function(el) { el.innerHTML = '<img src=\"' + " . json_encode($customlogo) . " + '\" alt=\"Logo\" style=\"max-height: 40px; border-radius: 8px;\">'; }); ";
     } else if (!empty($sitename)) {
@@ -212,6 +218,9 @@ function theme_ganesha_page_init(moodle_page $page) {
             })();
         ");
     }
+
+    // Inject custom ES/AMD module JavaScript for playful K-12 interactions.
+    $page->requires->js_call_amd('theme_ganesha/interactions', 'init');
 }
 
 

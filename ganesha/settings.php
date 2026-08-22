@@ -5,8 +5,36 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Ganesha theme administration settings.
+ *
+ * @package     theme_ganesha
+ * @copyright   2026 Ganesha Theme
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 defined('MOODLE_INTERNAL') || die();
+
+if (!function_exists('theme_ganesha_get_default_string')) {
+    /**
+     * Helper to fetch a default language string if it exists in cache, avoiding debugging alerts on fresh installs.
+     */
+    function theme_ganesha_get_default_string($identifier, $fallback) {
+        if (get_string_manager()->string_exists($identifier, 'theme_ganesha')) {
+            return get_string($identifier, 'theme_ganesha');
+        }
+        return $fallback;
+    }
+}
 
 if ($ADMIN->fulltree) {
     // Custom theme settings page.
@@ -40,7 +68,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/herotitle';
     $title = get_string('herotitle', 'theme_ganesha');
     $description = get_string('herotitle_desc', 'theme_ganesha');
-    $default = 'Namaste, Adventurer! Let\'s Explore!';
+    $default = theme_ganesha_get_default_string('herotitle_default', 'Namaste, Adventurer! Let\'s Explore!');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -48,7 +76,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/herosubtitle';
     $title = get_string('herosubtitle', 'theme_ganesha');
     $description = get_string('herosubtitle_desc', 'theme_ganesha');
-    $default = 'Every lesson is a magical step on your learning journey. What quest will we start today?';
+    $default = theme_ganesha_get_default_string('herosubtitle_default', 'Every lesson is a magical step on your learning journey. What quest will we start today?');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -105,7 +133,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/questheading';
     $title = get_string('questheading', 'theme_ganesha');
     $description = get_string('questheading_desc', 'theme_ganesha');
-    $default = 'Today\'s Active Quests';
+    $default = theme_ganesha_get_default_string('questheading_default', 'Today\'s Active Quests');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -113,7 +141,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/sitename';
     $title = get_string('sitename', 'theme_ganesha');
     $description = get_string('sitename_desc', 'theme_ganesha');
-    $default = 'Ganesha Academy';
+    $default = theme_ganesha_get_default_string('sitename_default', 'Ganesha Academy');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -156,7 +184,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/footertext';
     $title = get_string('footertext', 'theme_ganesha');
     $description = get_string('footertext_desc', 'theme_ganesha');
-    $default = 'Powered by Suman Kumar Das and Digital Tricksters';
+    $default = theme_ganesha_get_default_string('footertext_default', 'Powered by Suman Kumar Das and Digital Tricksters');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -164,7 +192,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/weatherlabel';
     $title = get_string('weatherlabel', 'theme_ganesha');
     $description = get_string('weatherlabel_desc', 'theme_ganesha');
-    $default = '🌈 Sky weather Board';
+    $default = theme_ganesha_get_default_string('weatherlabel_default', '🌈 Sky weather Board');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -172,7 +200,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/weathersubtitle';
     $title = get_string('weathersubtitle', 'theme_ganesha');
     $description = get_string('weathersubtitle_desc', 'theme_ganesha');
-    $default = 'Click to change the sky theme!';
+    $default = theme_ganesha_get_default_string('weathersubtitle_default', 'Click to change the sky theme!');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -180,7 +208,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchtitle';
     $title = get_string('scratchtitle', 'theme_ganesha');
     $description = get_string('scratchtitle_desc', 'theme_ganesha');
-    $default = '🎟️ Magic Scratch Card';
+    $default = theme_ganesha_get_default_string('scratchtitle_default', '🎟️ Magic Scratch Card');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -188,7 +216,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchsubtitle';
     $title = get_string('scratchsubtitle', 'theme_ganesha');
     $description = get_string('scratchsubtitle_desc', 'theme_ganesha');
-    $default = 'Scratch the silver box with your mouse to reveal your sticker!';
+    $default = theme_ganesha_get_default_string('scratchsubtitle_default', 'Scratch the silver box with your mouse to reveal your sticker!');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -196,7 +224,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchresetbtn';
     $title = get_string('scratchresetbtn', 'theme_ganesha');
     $description = get_string('scratchresetbtn_desc', 'theme_ganesha');
-    $default = 'Reset Ticket';
+    $default = theme_ganesha_get_default_string('scratchresetbtn_default', 'Reset Ticket');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -204,7 +232,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchrewards';
     $title = get_string('scratchrewards', 'theme_ganesha');
     $description = get_string('scratchrewards_desc', 'theme_ganesha');
-    $default = '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD';
+    $default = theme_ganesha_get_default_string('scratchrewards_default', '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -212,7 +240,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/owlmascot';
     $title = get_string('owlmascot', 'theme_ganesha');
     $description = get_string('owlmascot_desc', 'theme_ganesha');
-    $default = '🦉';
+    $default = theme_ganesha_get_default_string('owlmascot_default', '🦉');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -220,7 +248,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/owltrivia';
     $title = get_string('owltrivia', 'theme_ganesha');
     $description = get_string('owltrivia_desc', 'theme_ganesha');
-    $default = "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!\nDid you know? Honey never spoils! You could eat 3000-year-old honey!\nDid you know? Bananas are berries, but strawberries aren't!\nDid you know? Wombat poop is cube-shaped! This stops it from rolling away!\nDid you know? A day on Venus is longer than a year on Venus!\nDid you know? Cows have best friends and get stressed when they are separated!\nDid you know? Octopuses have three hearts and blue blood!\nDid you know? Sea otters hold hands while sleeping so they don't drift apart!\nDid you know? Sloths can hold their breath longer than dolphins can!\nDid you know? Dolphins sleep with one eye open to watch for sharks!";
+    $default = theme_ganesha_get_default_string('owltrivia_default', "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!\nDid you know? Honey never spoils! You could eat 3000-year-old honey!\nDid you know? Bananas are berries, but strawberries aren't!\nDid you know? Wombat poop is cube-shaped! This stops it from rolling away!\nDid you know? A day on Venus is longer than a year on Venus!");
     $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -228,7 +256,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/pettitle';
     $title = get_string('pettitle', 'theme_ganesha');
     $description = get_string('pettitle_desc', 'theme_ganesha');
-    $default = "Ganesha's Sweet Shop";
+    $default = theme_ganesha_get_default_string('pettitle_default', "Ganesha's Sweet Shop");
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -236,7 +264,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petdesc';
     $title = get_string('petdesc', 'theme_ganesha');
     $description = get_string('petdesc_desc', 'theme_ganesha');
-    $default = 'Feed baby Ganesha his favorite sweet (Modak) to become best friends!';
+    $default = theme_ganesha_get_default_string('petdesc_default', 'Feed baby Ganesha his favorite sweet (Modak) to become best friends!');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -244,7 +272,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petfeedbtn';
     $title = get_string('petfeedbtn', 'theme_ganesha');
     $description = get_string('petfeedbtn_desc', 'theme_ganesha');
-    $default = '🍬 Feed a Modak!';
+    $default = theme_ganesha_get_default_string('petfeedbtn_default', '🍬 Feed a Modak!');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -252,7 +280,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petmascot';
     $title = get_string('petmascot', 'theme_ganesha');
     $description = get_string('petmascot_desc', 'theme_ganesha');
-    $default = '🐘';
+    $default = theme_ganesha_get_default_string('petmascot_default', '🐘');
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -260,7 +288,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petspeeches';
     $title = get_string('petspeeches', 'theme_ganesha');
     $description = get_string('petspeeches_desc', 'theme_ganesha');
-    $default = "Hello friend! Let's study together today!\nYum! That Modak was delicious! Thank you! 🍬\nOoh, that tickles my trunk! Hahaha!\nFriendship level up! We are best friends now! 🐘❤️\nAre you ready for your next study quest? Let's go!\nWow! You are feeding me so many delicious treats!\nLearning is a super fun adventure with you!\nYou are the smartest adventurer in the kingdom!";
+    $default = theme_ganesha_get_default_string('petspeeches_default', "Hello friend! Let's study together today!\nYum! That Modak was delicious! Thank you! 🍬\nOoh, that tickles my trunk! Hahaha!\nFriendship level up! We are best friends now! 🐘❤️\nAre you ready for your next study quest? Let's go!\nWow! You are feeding me so many delicious treats!\nLearning is a super fun adventure with you!\nYou are the smartest adventurer in the kingdom!");
     $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 }
