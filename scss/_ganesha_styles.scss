@@ -1,4 +1,26 @@
-/* Custom K-12 Playful Styles for Ganesha Theme */
+/**
+ * Ganesha theme core SCSS visual style sheets and K-12 components layout.
+ *
+ * This file is part of Moodle - http://moodle.org/
+ *
+ * Moodle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Moodle is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @package     theme_ganesha
+ * @copyright   2026 Ganesha Theme
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 
 /* ==========================================
    1. ANIMATIONS & EFFECTS
@@ -826,7 +848,7 @@ body.sensory-cozy {
    ========================================== */
 
 /* Overhaul Moodle Core cards & blocks globally */
-.card, .block, .block-region, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline {
+.card, .block, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline {
     border: $cartoon-border-width solid $cartoon-border-color !important;
     border-radius: $border-radius-lg !important;
     box-shadow: $cartoon-shadow !important;
@@ -1237,7 +1259,7 @@ body.sky-theme-starry {
     }
 
     // Convert standard Moodle blocks & cards to glowing neon twilight cards!
-    .card, .block, .block-region, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline, .coursebox, .treasure-chest-widget, .vintage-radio-widget, .fact-bubble-widget {
+    .card, .block, .block_recentlyaccesseditems, .block_calendar_month, .block_timeline, .coursebox, .treasure-chest-widget, .vintage-radio-widget, .fact-bubble-widget {
         background-color: #1a2d42 !important;
         border: 3px dashed #4bb3fd !important; // Neon dashed border
         box-shadow: 4px 4px 0px #4bb3fd, 0px 0px 12px rgba(75, 179, 253, 0.2) !important;

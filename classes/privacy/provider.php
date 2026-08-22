@@ -15,20 +15,33 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Ganesha theme version details.
+ * Privacy API provider for the Ganesha theme.
+ *
+ * @package     theme_ganesha
+ * @category    privacy
+ * @copyright   2026 Ganesha Theme
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace theme_ganesha\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Privacy API provider implementation.
  *
  * @package     theme_ganesha
  * @copyright   2026 Ganesha Theme
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class provider implements \core_privacy\local\metadata\null_provider {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2026060204;             // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2021051700;             // Requires Moodle 3.11 or later.
-$plugin->component = 'theme_ganesha';        // Full name of the plugin (must match folder name).
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.1.8';
-$plugin->dependencies = [
-    'theme_boost' => 2021051700              // Standard Boost dependency.
-];
+    /**
+     * Get the language string identifier explaining why this plugin stores no data.
+     *
+     * @return string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

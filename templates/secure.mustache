@@ -1,0 +1,58 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    Ganesha secure layout template.
+
+    @package    theme_ganesha
+    @copyright  2026 Ganesha Theme
+    @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+}}
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+
+{{{ output.standard_top_of_body_html }}}
+
+<div id="page-wrapper">
+    <nav class="navbar navbar-expand fixed-top">
+        <div class="container-fluid justify-content-center">
+            <span class="navbar-brand">
+                🔐 <span>{{#str}} securezone, theme_ganesha {{/str}}</span>
+            </span>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 100px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+                <div class="cartoon-card p-5" style="background-color: #ffffff; border-color: #ff758f !important; box-shadow: 4px 4px 0px #ff758f !important;">
+                    <div class="text-center mb-4">
+                        <span style="font-size: 3rem;">🌟</span>
+                        <h3 style="font-family: 'Fredoka'; font-weight:700; color: #ff758f;">{{#str}} yougotthis, theme_ganesha {{/str}}</h3>
+                        <p class="text-muted">{{#str}} cheering, theme_ganesha {{/str}}</p>
+                    </div>
+                    {{{ output.main_content }}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{{ output.standard_end_of_body_html }}}
+
+</body>
+</html>
