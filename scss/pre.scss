@@ -32,7 +32,8 @@ $purple-accent: #b5179e !default;      // Vibrant purple
 $cream-bg: #fffbf4 !default;           // Warm cream paper background
 
 // 2. Playful Font Overrides
-$font-family-sans-serif: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-sans-serif: 'Quicksand', -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
 $headings-font-family: 'Fredoka', sans-serif !default;
 $font-weight-normal: 500 !default; // Bold enough for easy K-12 reading.
 $font-weight-bold: 700 !default;
@@ -60,5 +61,5 @@ $btn-font-weight: 700 !default;
 // Custom Outline Styling (Hand-drawn look helper)
 $cartoon-border-width: 3px !default;
 $cartoon-border-color: #332d27 !default;
-$cartoon-shadow: 4px 4px 0px 0px #332d27 !default;
-$cartoon-shadow-hover: 2px 2px 0px 0px #332d27 !default;
+$cartoon-shadow: 4px 4px 0 0 #332d27 !default;
+$cartoon-shadow-hover: 2px 2px 0 0 #332d27 !default;

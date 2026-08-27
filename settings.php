@@ -27,6 +27,10 @@ defined('MOODLE_INTERNAL') || die();
 if (!function_exists('theme_ganesha_get_default_string')) {
     /**
      * Helper to fetch a default language string if it exists in cache, avoiding debugging alerts on fresh installs.
+     *
+     * @param string $identifier String key identifier.
+     * @param string $fallback Fallback translation text.
+     * @return string The resolved localized string or fallback text.
      */
     function theme_ganesha_get_default_string($identifier, $fallback) {
         if (get_string_manager()->string_exists($identifier, 'theme_ganesha')) {
@@ -87,7 +91,7 @@ if ($ADMIN->fulltree) {
     $default = 'sparkle';
     $choices = [
         'sparkle' => get_string('sparkle_mode', 'theme_ganesha'),
-        'cozy' => get_string('cozy_mode', 'theme_ganesha')
+        'cozy' => get_string('cozy_mode', 'theme_ganesha'),
     ];
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $settings->add($setting);
@@ -100,7 +104,7 @@ if ($ADMIN->fulltree) {
     $choices = [
         'super_happy' => get_string('mascot_super_happy', 'theme_ganesha'),
         'studious' => get_string('mascot_studious', 'theme_ganesha'),
-        'playful' => get_string('mascot_playful', 'theme_ganesha')
+        'playful' => get_string('mascot_playful', 'theme_ganesha'),
     ];
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $settings->add($setting);
@@ -154,7 +158,7 @@ if ($ADMIN->fulltree) {
         '14px' => get_string('fontsize_small', 'theme_ganesha'),
         '16px' => get_string('fontsize_standard', 'theme_ganesha'),
         '18px' => get_string('fontsize_large', 'theme_ganesha'),
-        '20px' => get_string('fontsize_extra_large', 'theme_ganesha')
+        '20px' => get_string('fontsize_extra_large', 'theme_ganesha'),
     ];
     $setting = new admin_setting_configselect($name, $title, $description, $default, $choices);
     $settings->add($setting);
@@ -163,14 +167,28 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/logo';
     $title = get_string('logo', 'theme_ganesha');
     $description = get_string('logo_desc', 'theme_ganesha');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'logo', 0, ['maxfiles' => 1, 'accepted_types' => ['image']]);
+    $setting = new admin_setting_configstoredfile(
+        $name,
+        $title,
+        $description,
+        'logo',
+        0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]
+    );
     $settings->add($setting);
 
     // 15. Custom Hero Mascot Upload (Moodle Filepicker API)
     $name = 'theme_ganesha/heroimage';
     $title = get_string('heroimage', 'theme_ganesha');
     $description = get_string('heroimage_desc', 'theme_ganesha');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'heroimage', 0, ['maxfiles' => 1, 'accepted_types' => ['image']]);
+    $setting = new admin_setting_configstoredfile(
+        $name,
+        $title,
+        $description,
+        'heroimage',
+        0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]
+    );
     $settings->add($setting);
 
     // 16. Custom Login Mascot Upload (Moodle Filepicker API)
@@ -248,7 +266,14 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/owltrivia';
     $title = get_string('owltrivia', 'theme_ganesha');
     $description = get_string('owltrivia_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('owltrivia_default', "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!\nDid you know? Honey never spoils! You could eat 3000-year-old honey!\nDid you know? Bananas are berries, but strawberries aren't!\nDid you know? Wombat poop is cube-shaped! This stops it from rolling away!\nDid you know? A day on Venus is longer than a year on Venus!");
+    $default = theme_ganesha_get_default_string(
+        'owltrivia_default',
+        "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!\n"
+        . "Did you know? Honey never spoils! You could eat 3000-year-old honey!\n"
+        . "Did you know? Bananas are berries, but strawberries aren't!\n"
+        . "Did you know? Wombat poop is cube-shaped! This stops it from rolling away!\n"
+        . "Did you know? A day on Venus is longer than a year on Venus!"
+    );
     $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -288,10 +313,17 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petspeeches';
     $title = get_string('petspeeches', 'theme_ganesha');
     $description = get_string('petspeeches_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('petspeeches_default', "Hello friend! Let's study together today!\nYum! That Modak was delicious! Thank you! 🍬\nOoh, that tickles my trunk! Hahaha!\nFriendship level up! We are best friends now! 🐘❤️\nAre you ready for your next study quest? Let's go!\nWow! You are feeding me so many delicious treats!\nLearning is a super fun adventure with you!\nYou are the smartest adventurer in the kingdom!");
+    $default = theme_ganesha_get_default_string(
+        'petspeeches_default',
+        "Hello friend! Let's study together today!\n"
+        . "Yum! That Modak was delicious! Thank you! 🍬\n"
+        . "Ooh, that tickles my trunk! Hahaha!\n"
+        . "Friendship level up! We are best friends now! 🐘❤️\n"
+        . "Are you ready for your next study quest? Let's go!\n"
+        . "Wow! You are feeding me so many delicious treats!\n"
+        . "Learning is a super fun adventure with you!\n"
+        . "You are the smartest adventurer in the kingdom!"
+    );
     $setting = new admin_setting_configtextarea($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 }
-
-
-

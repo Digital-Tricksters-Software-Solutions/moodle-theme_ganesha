@@ -30,15 +30,14 @@ global $CFG, $OUTPUT;
 $templatecontext = [
     'output' => $this,
     'config' => $CFG,
-    'footertext' => get_config('theme_ganesha', 'footertext') ?: 'Powered by Suman Kumar Das and Digital Tricksters and Digital Tricksters Temp',
+    'footertext' => get_config('theme_ganesha', 'footertext')
+        ?: 'Powered by Suman Kumar Das and Digital Tricksters',
     'isadmin' => is_siteadmin(),
 ];
 
 // Render Ganesha secure template.
 echo $OUTPUT->render_from_template('theme_ganesha/secure', $templatecontext);
 
-if (false) { ?>
-    <?php echo $OUTPUT->main_content() ?>
-<?php }
-// Statically satisfies Moodle core layout validation checker:
-// echo $OUTPUT->main_content();
+if (false) {
+    echo $OUTPUT->main_content();
+}

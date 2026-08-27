@@ -107,11 +107,12 @@ function theme_ganesha_get_main_scss_content($theme) {
  */
 function theme_ganesha_page_init(moodle_page $page) {
     global $CFG;
-    
     // Add custom K-12 assets, Google fonts, and playful favicon.
-    $page->requires->css(new moodle_url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap'));
-    
-
+    $fonturl = 'https://fonts.googleapis.com/css2'
+        . '?family=Fredoka:wght@300..700'
+        . '&family=Quicksand:wght@300..700'
+        . '&display=swap';
+    $page->requires->css(new moodle_url($fonturl));
 
     // Fetch theme visibility and font size settings and apply via CSS injection.
     $showquicklinks = get_config('theme_ganesha', 'showquicklinks');
@@ -135,6 +136,10 @@ function theme_ganesha_page_init(moodle_page $page) {
     if (!function_exists('theme_ganesha_get_default_string')) {
         /**
          * Helper to fetch a default language string if it exists in cache, avoiding debugging alerts on fresh installs.
+         *
+         * @param string $identifier String key identifier.
+         * @param string $fallback Fallback translation text.
+         * @return string The resolved localized string or fallback text.
          */
         function theme_ganesha_get_default_string($identifier, $fallback) {
             if (get_string_manager()->string_exists($identifier, 'theme_ganesha')) {
@@ -149,12 +154,26 @@ function theme_ganesha_page_init(moodle_page $page) {
     $herosubtitle = get_config('theme_ganesha', 'herosubtitle');
     $questheading = get_config('theme_ganesha', 'questheading');
 
-    // Fetch lists from Ganesha theme admin config and pass to Javascript dynamically
-    $scratchrewards = get_config('theme_ganesha', 'scratchrewards') ?: theme_ganesha_get_default_string('scratchrewards_default', '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD');
-    $owltrivia = get_config('theme_ganesha', 'owltrivia') ?: theme_ganesha_get_default_string('owltrivia_default', "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!");
-    $petspeeches = get_config('theme_ganesha', 'petspeeches') ?: theme_ganesha_get_default_string('petspeeches_default', "Hello friend! Let's study together today!");
-    $owlmascot = get_config('theme_ganesha', 'owlmascot') ?: theme_ganesha_get_default_string('owlmascot_default', '🦉');
-    $petmascot = get_config('theme_ganesha', 'petmascot') ?: theme_ganesha_get_default_string('petmascot_default', '🐘');
+    // Fetch lists from Ganesha theme admin config and pass to Javascript dynamically.
+    $scratchrewards = get_config('theme_ganesha', 'scratchrewards')
+        ?: theme_ganesha_get_default_string(
+            'scratchrewards_default',
+            '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD'
+        );
+    $owltrivia = get_config('theme_ganesha', 'owltrivia')
+        ?: theme_ganesha_get_default_string(
+            'owltrivia_default',
+            "Did you know? An elephant's trunk has over 40,000 muscles! That's why Ganesha is so super strong!"
+        );
+    $petspeeches = get_config('theme_ganesha', 'petspeeches')
+        ?: theme_ganesha_get_default_string(
+            'petspeeches_default',
+            "Hello friend! Let's study together today!"
+        );
+    $owlmascot = get_config('theme_ganesha', 'owlmascot')
+        ?: theme_ganesha_get_default_string('owlmascot_default', '🦉');
+    $petmascot = get_config('theme_ganesha', 'petmascot')
+        ?: theme_ganesha_get_default_string('petmascot_default', '🐘');
 
     // Retrieve uploaded stored files via Moodle's native theme file serving API.
     $customlogo = $page->theme->setting_file_url('logo', 'logo');
@@ -164,44 +183,57 @@ function theme_ganesha_page_init(moodle_page $page) {
     // Build the dynamic injection Javascript.
     $js = '';
 
-    // Inject dynamic client-side widget configurations safely
+    // Inject dynamic client-side widget configurations safely.
     $js .= "window.GaneshaRewardsRaw = " . json_encode($scratchrewards) . "; ";
     $js .= "window.GaneshaTriviaRaw = " . json_encode($owltrivia) . "; ";
     $js .= "window.GaneshaSpeechesRaw = " . json_encode($petspeeches) . "; ";
     $js .= "window.GaneshaOwlMascot = " . json_encode($owlmascot) . "; ";
     $js .= "window.GaneshaPetMascot = " . json_encode($petmascot) . "; ";
 
-    
-    // Inject the custom font size and component hide variables safely using DOM elements to avoid PHP core method errors.
+    // Inject the custom font size and component hide variables safely using DOM
+    // elements to avoid PHP core method errors.
     if (!empty($css)) {
         $js .= "var style = document.createElement('style'); style.textContent = " . json_encode($css) . "; document.head.appendChild(style); ";
     }
 
-    // 1. Logo & Site Name Branding
-    $js .= "var brandAnchors = document.querySelectorAll('.navbar-brand'); brandAnchors.forEach(function(el) { el.setAttribute('href', " . json_encode($CFG->wwwroot . '/index.php') . "); }); ";
+    // 1. Logo & Site Name Branding.
+    $js .= "var brandAnchors = document.querySelectorAll('.navbar-brand'); "
+        . "brandAnchors.forEach(function(el) { el.setAttribute('href', "
+        . json_encode($CFG->wwwroot . '/index.php') . "); }); ";
     if (!empty($customlogo)) {
-        $js .= "var b = document.querySelectorAll('.navbar-brand'); b.forEach(function(el) { el.innerHTML = '<img src=\"' + " . json_encode($customlogo) . " + '\" alt=\"Logo\" style=\"max-height: 40px; border-radius: 8px;\">'; }); ";
+        $js .= "var b = document.querySelectorAll('.navbar-brand'); "
+            . "b.forEach(function(el) { el.innerHTML = '<img src=\"' + "
+            . json_encode($customlogo)
+            . " + '\" alt=\"Logo\" style=\"max-height: 40px; border-radius: 8px;\">'; }); ";
     } else if (!empty($sitename)) {
-        $js .= "var b = document.querySelectorAll('.navbar-brand span'); b.forEach(function(el) { el.textContent = " . json_encode($sitename) . "; }); ";
+        $js .= "var b = document.querySelectorAll('.navbar-brand span'); "
+            . "b.forEach(function(el) { el.textContent = "
+            . json_encode($sitename) . "; }); ";
     }
 
-    // 2. Banner Texts
+    // 2. Banner Texts.
     if (!empty($herotitle)) {
-        $js .= "var t = document.querySelector('.hero-title'); if (t) t.textContent = " . json_encode($herotitle) . "; ";
+        $js .= "var t = document.querySelector('.hero-title'); "
+            . "if (t) t.textContent = " . json_encode($herotitle) . "; ";
     }
     if (!empty($herosubtitle)) {
-        $js .= "var s = document.querySelector('.hero-subtitle'); if (s) s.textContent = " . json_encode($herosubtitle) . "; ";
+        $js .= "var s = document.querySelector('.hero-subtitle'); "
+            . "if (s) s.textContent = " . json_encode($herosubtitle) . "; ";
     }
     if (!empty($questheading)) {
-        $js .= "var q = document.querySelector('.ganesha-quests-header h3'); if (q) q.textContent = '📚 ' + " . json_encode($questheading) . "; ";
+        $js .= "var q = document.querySelector('.ganesha-quests-header h3'); "
+            . "if (q) q.textContent = '📚 ' + " . json_encode($questheading) . "; ";
     }
 
-    // 3. Custom Graphics (Homepage Hero Banner & Login Mascot)
+    // 3. Custom Graphics (Homepage Hero Banner & Login Mascot).
     if (!empty($customheroimage)) {
-        $js .= "var h = document.querySelector('.mascot-image-wrapper img'); if (h) h.src = " . json_encode($customheroimage) . "; ";
+        $js .= "var h = document.querySelector('.mascot-image-wrapper img'); "
+            . "if (h) h.src = " . json_encode($customheroimage) . "; ";
     }
     if (!empty($customloginimage)) {
-        $js .= "var l = document.querySelector('.ganesha-login-mascot'); if (l) { l.src = " . json_encode($customloginimage) . "; l.setAttribute('data-peekaboo', " . json_encode($customloginimage) . "); } ";
+        $js .= "var l = document.querySelector('.ganesha-login-mascot'); "
+            . "if (l) { l.src = " . json_encode($customloginimage) . "; "
+            . "l.setAttribute('data-peekaboo', " . json_encode($customloginimage) . "); } ";
     }
 
     if (!empty($js)) {
@@ -229,6 +261,9 @@ function theme_ganesha_page_init(moodle_page $page) {
 
 /**
  * Serves layout images and custom icons for theme_ganesha.
+ *
+ * @param string $imagename Name of the image file.
+ * @return moodle_url The URL of the image.
  */
 function theme_ganesha_get_image_url($imagename) {
     global $CFG;

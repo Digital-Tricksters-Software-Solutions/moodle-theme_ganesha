@@ -30,5 +30,5 @@ $plugin->component = 'theme_ganesha';        // Full name of the plugin (must ma
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '1.1.8';
 $plugin->dependencies = [
-    'theme_boost' => 2021051700              // Standard Boost dependency.
+    'theme_boost' => 2021051700,             // Standard Boost dependency.
 ];

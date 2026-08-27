@@ -20,6 +20,23 @@
     @package    theme_ganesha
     @copyright  2026 Ganesha Theme
     @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+
+    @template theme_ganesha/drawers
+
+    Example context (json):
+    {
+        "bodyattributes": "class=\"flat\"",
+        "output": {
+            "standard_top_of_body_html": "",
+            "main_content": "<h1>Hello World</h1>",
+            "user_menu": "<div>User Menu</div>",
+            "standard_end_of_body_html": ""
+        },
+        "config": {
+            "wwwroot": "http://localhost"
+        },
+        "isadmin": true
+    }
 }}
 {{> theme_boost/head }}
 

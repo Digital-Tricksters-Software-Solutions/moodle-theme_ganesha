@@ -38,7 +38,7 @@ $THEME->settingfileareas = ['logo', 'heroimage', 'loginimage'];
 
 
 // Direct SCSS compilation hooking.
-$THEME->scss = function($theme) {
+$THEME->scss = function ($theme) {
     return theme_ganesha_get_main_scss_content($theme);
 };
 

@@ -173,8 +173,3 @@ $string['petmascot_default'] = '🐘';
 $string['scratchhere'] = '⭐ SCRATCH HERE ⭐';
 $string['friendshiplevelup'] = '🎉 Friendship Level Up! We are now level {level}! You are my best friend! 🐘❤️';
 $string['signup'] = 'Sign Up';
-
-
-
-
-

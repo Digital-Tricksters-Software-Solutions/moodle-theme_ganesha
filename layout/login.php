@@ -37,9 +37,6 @@ $templatecontext = [
 // real login form and satisfies core's layout validation.
 echo $OUTPUT->render_from_template('theme_ganesha/login', $templatecontext);
 
-if (false) { ?>
-    <?php echo $OUTPUT->main_content() ?>
-<?php }
-// Statically satisfies Moodle core layout validation checker:
-// echo $OUTPUT->main_content();
-
+if (false) {
+    echo $OUTPUT->main_content();
+}
