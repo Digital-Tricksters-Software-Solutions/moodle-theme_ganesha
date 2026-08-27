@@ -22,7 +22,6 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Returns the main SCSS content for compiling the theme.
@@ -119,7 +118,7 @@ function theme_ganesha_page_init(moodle_page $page) {
     $showmascot = get_config('theme_ganesha', 'showmascot');
     $showprogress = get_config('theme_ganesha', 'showprogress');
     $fontsize = get_config('theme_ganesha', 'fontsize') ?: '16px';
-    
+
     $css = '';
     $css .= 'html, body { font-size: ' . $fontsize . ' !important; } ';
     if ($showquicklinks === '0') {
@@ -193,7 +192,9 @@ function theme_ganesha_page_init(moodle_page $page) {
     // Inject the custom font size and component hide variables safely using DOM
     // elements to avoid PHP core method errors.
     if (!empty($css)) {
-        $js .= "var style = document.createElement('style'); style.textContent = " . json_encode($css) . "; document.head.appendChild(style); ";
+        $js .= "var style = document.createElement('style'); "
+            . "style.textContent = " . json_encode($css) . "; "
+            . "document.head.appendChild(style); ";
     }
 
     // 1. Logo & Site Name Branding.

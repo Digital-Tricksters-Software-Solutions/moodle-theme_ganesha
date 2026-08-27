@@ -48,7 +48,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/primarycolor';
     $title = get_string('primarycolor', 'theme_ganesha');
     $description = get_string('primarycolor_desc', 'theme_ganesha');
-    $default = '#ff7e36'; // Playful warm orange
+    $default = '#ff7e36'; // Playful warm orange.
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
@@ -56,7 +56,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/secondarycolor';
     $title = get_string('secondarycolor', 'theme_ganesha');
     $description = get_string('secondarycolor_desc', 'theme_ganesha');
-    $default = '#ffc83b'; // Bouncy warm yellow
+    $default = '#ffc83b'; // Bouncy warm yellow.
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
@@ -64,7 +64,7 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/accentcolor';
     $title = get_string('accentcolor', 'theme_ganesha');
     $description = get_string('accentcolor_desc', 'theme_ganesha');
-    $default = '#4bb3fd'; // Sky blue
+    $default = '#4bb3fd'; // Sky blue.
     $setting = new admin_setting_configcolourpicker($name, $title, $description, $default);
     $settings->add($setting);
 
@@ -80,7 +80,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/herosubtitle';
     $title = get_string('herosubtitle', 'theme_ganesha');
     $description = get_string('herosubtitle_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('herosubtitle_default', 'Every lesson is a magical step on your learning journey. What quest will we start today?');
+    $default = theme_ganesha_get_default_string(
+        'herosubtitle_default',
+        'Every lesson is a magical step on your learning journey. What quest will we start today?'
+    );
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -195,7 +198,14 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/loginimage';
     $title = get_string('loginimage', 'theme_ganesha');
     $description = get_string('loginimage_desc', 'theme_ganesha');
-    $setting = new admin_setting_configstoredfile($name, $title, $description, 'loginimage', 0, ['maxfiles' => 1, 'accepted_types' => ['image']]);
+    $setting = new admin_setting_configstoredfile(
+        $name,
+        $title,
+        $description,
+        'loginimage',
+        0,
+        ['maxfiles' => 1, 'accepted_types' => ['image']]
+    );
     $settings->add($setting);
 
     // 17. Custom Footer Text
@@ -234,7 +244,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchsubtitle';
     $title = get_string('scratchsubtitle', 'theme_ganesha');
     $description = get_string('scratchsubtitle_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('scratchsubtitle_default', 'Scratch the silver box with your mouse to reveal your sticker!');
+    $default = theme_ganesha_get_default_string(
+        'scratchsubtitle_default',
+        'Scratch the silver box with your mouse to reveal your sticker!'
+    );
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -250,7 +263,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/scratchrewards';
     $title = get_string('scratchrewards', 'theme_ganesha');
     $description = get_string('scratchrewards_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('scratchrewards_default', '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD');
+    $default = theme_ganesha_get_default_string(
+        'scratchrewards_default',
+        '🏆 SUPER STAR!,🦄 MAGICAL UNICORN,🚀 SPACE EXPLORER,🦖 DINO ADVENTURE,🍩 YUMMY DONUT,🎨 ART WIZARD'
+    );
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 
@@ -289,7 +305,10 @@ if ($ADMIN->fulltree) {
     $name = 'theme_ganesha/petdesc';
     $title = get_string('petdesc', 'theme_ganesha');
     $description = get_string('petdesc_desc', 'theme_ganesha');
-    $default = theme_ganesha_get_default_string('petdesc_default', 'Feed baby Ganesha his favorite sweet (Modak) to become best friends!');
+    $default = theme_ganesha_get_default_string(
+        'petdesc_default',
+        'Feed baby Ganesha his favorite sweet (Modak) to become best friends!'
+    );
     $setting = new admin_setting_configtext($name, $title, $description, $default, PARAM_TEXT);
     $settings->add($setting);
 

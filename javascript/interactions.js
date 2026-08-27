@@ -5,7 +5,7 @@
  * @copyright  2026 Ganesha Theme
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define([], function () {
+define([], function() {
     'use strict';
 
     var Confetti = {
@@ -15,7 +15,7 @@ define([], function () {
         colors: ['#ff7e36', '#ffc83b', '#4bb3fd', '#ff758f', '#51cb82', '#b5179e'],
         active: false,
 
-        init: function () {
+        init: function() {
             if (!document.getElementById('confetti-canvas')) {
                 var c = document.createElement('canvas');
                 c.id = 'confetti-canvas';
@@ -29,14 +29,14 @@ define([], function () {
             }
         },
 
-        resizeCanvas: function () {
+        resizeCanvas: function() {
             if (this.canvas) {
                 this.canvas.width = window.innerWidth;
                 this.canvas.height = window.innerHeight;
             }
         },
 
-        spawn: function (x, y) {
+        spawn: function(x, y) {
             this.init();
             var count = 60;
             for (var i = 0; i < count; i++) {
@@ -59,7 +59,7 @@ define([], function () {
             }
         },
 
-        animate: function () {
+        animate: function() {
             var self = Confetti;
             if (!self.canvas || self.particles.length === 0) {
                 self.active = false;
@@ -101,7 +101,7 @@ define([], function () {
         isPlaying: false,
         activeChannel: null,
 
-        init: function () {
+        init: function() {
             if (!this.audioCtx) {
                 var AudioContextClass = window.AudioContext || window.webkitAudioContext;
                 if (AudioContextClass) {
@@ -110,7 +110,7 @@ define([], function () {
             }
         },
 
-        playTone: function (frequency, type, startTime, duration, volume) {
+        playTone: function(frequency, type, startTime, duration, volume) {
             if (!this.audioCtx) {
                 return;
             }
@@ -131,7 +131,7 @@ define([], function () {
             osc.stop(startTime + duration);
         },
 
-        playMelody: function (notes, type, volume) {
+        playMelody: function(notes, type, volume) {
             this.init();
             this.stop();
 
@@ -176,18 +176,18 @@ define([], function () {
             playNextNote();
         },
 
-        stop: function () {
+        stop: function() {
             this.isPlaying = false;
             if (this.currentSource) {
                 clearTimeout(this.currentSource);
                 this.currentSource = null;
             }
-            document.querySelectorAll('.radio-btn').forEach(function (b) {
+            document.querySelectorAll('.radio-btn').forEach(function(b) {
                 b.classList.remove('active');
             });
         },
 
-        toggleChannel: function (channel, btn) {
+        toggleChannel: function(channel, btn) {
             this.init();
 
             if (this.activeChannel === channel) {
@@ -197,7 +197,7 @@ define([], function () {
                 return;
             }
 
-            document.querySelectorAll('.radio-btn').forEach(function (b) {
+            document.querySelectorAll('.radio-btn').forEach(function(b) {
                 b.classList.remove('active');
             });
 
@@ -241,7 +241,7 @@ define([], function () {
                 ];
                 this.playMelody(notesList, 'sine', 0.1);
                 var self = this;
-                setTimeout(function () {
+                setTimeout(function() {
                     if (self.activeChannel === 'sparkle') {
                         btn.classList.remove('active');
                         self.activeChannel = null;
@@ -253,11 +253,11 @@ define([], function () {
     };
 
     var SkyWeather = {
-        setTheme: function (theme, btn) {
+        setTheme: function(theme, btn) {
             var body = document.body;
             body.classList.remove('sky-theme-sunny', 'sky-theme-rainbow', 'sky-theme-starry');
 
-            document.querySelectorAll('.sky-selector-widget .radio-btn').forEach(function (b) {
+            document.querySelectorAll('.sky-selector-widget .radio-btn').forEach(function(b) {
                 b.classList.remove('active');
             });
 
@@ -297,13 +297,13 @@ define([], function () {
         function applySensoryMode(mode) {
             if (mode === 'cozy') {
                 body.classList.add('sensory-cozy');
-                toggleBtns.forEach(function (btn) {
+                toggleBtns.forEach(function(btn) {
                     btn.classList.add('cozy');
                     btn.innerHTML = sparklesText;
                 });
             } else {
                 body.classList.remove('sensory-cozy');
-                toggleBtns.forEach(function (btn) {
+                toggleBtns.forEach(function(btn) {
                     btn.classList.remove('cozy');
                     btn.innerHTML = cozyText;
                 });
@@ -312,7 +312,7 @@ define([], function () {
 
         applySensoryMode(currentMode);
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target && e.target.classList.contains('sensory-toggle-btn')) {
                 e.preventDefault();
                 if (body.classList.contains('sensory-cozy')) {
@@ -331,7 +331,7 @@ define([], function () {
      * Setup task completion listeners to spawn confetti.
      */
     function initConfettiListener() {
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             var completionBtn = e.target.closest('.completion-dialog button')
                 || e.target.closest('.activity-item .btn-outline-success')
                 || e.target.closest('.btn-success');
@@ -353,7 +353,7 @@ define([], function () {
             var originalSrc = mascotImg.getAttribute('src');
             var peekabooSrc = mascotImg.getAttribute('data-peekaboo');
 
-            passwordField.addEventListener('focus', function () {
+            passwordField.addEventListener('focus', function() {
                 if (peekabooSrc) {
                     mascotImg.setAttribute('src', peekabooSrc);
                 }
@@ -363,7 +363,7 @@ define([], function () {
                 }
             });
 
-            passwordField.addEventListener('blur', function () {
+            passwordField.addEventListener('blur', function() {
                 mascotImg.setAttribute('src', originalSrc);
                 mascotImg.classList.remove('covering-eyes');
                 if (mascotContainer) {
@@ -379,11 +379,10 @@ define([], function () {
      * @param {string} rewardsRaw Comma-separated rewards list.
      * @param {string} triviaRaw Newline-separated trivia list.
      * @param {string} speechesRaw Newline-separated speeches list.
-     * @param {string} didYouKnowText Localized "Did you know?" title prefix.
      */
-    function parseSettings(rewardsRaw, triviaRaw, speechesRaw, didYouKnowText) {
+    function parseSettings(rewardsRaw, triviaRaw, speechesRaw) {
         if (rewardsRaw) {
-            parsedRewards = rewardsRaw.split(',').map(function (item) {
+            parsedRewards = rewardsRaw.split(',').map(function(item) {
                 var trimmed = item.trim();
                 var regex = /^[\uD800-\uDBFF][\uDC00-\uDFFF]|^[\u2600-\u27BF]|^./u;
                 var firstEmoji = trimmed.match(regex);
@@ -407,9 +406,9 @@ define([], function () {
         }
 
         if (triviaRaw) {
-            parsedTrivia = triviaRaw.split('\n').map(function (l) {
+            parsedTrivia = triviaRaw.split('\n').map(function(l) {
                 return l.trim();
-            }).filter(function (l) {
+            }).filter(function(l) {
                 return l.length > 0;
             });
         }
@@ -424,9 +423,9 @@ define([], function () {
         }
 
         if (speechesRaw) {
-            parsedSpeeches = speechesRaw.split('\n').map(function (l) {
+            parsedSpeeches = speechesRaw.split('\n').map(function(l) {
                 return l.trim();
-            }).filter(function (l) {
+            }).filter(function(l) {
                 return l.length > 0;
             });
         }
@@ -444,7 +443,7 @@ define([], function () {
      * Initializer method called by Moodle AMD loader.
      */
     return {
-        init: function () {
+        init: function() {
             var container = document.getElementById('quests');
             if (!container) {
                 return;
@@ -477,7 +476,7 @@ define([], function () {
             initSensoryMode(cozyText, sparklesText);
             initConfettiListener();
             initPasswordPeek();
-            parseSettings(rewardsRaw, triviaRaw, speechesRaw, didYouKnowText);
+            parseSettings(rewardsRaw, triviaRaw, speechesRaw);
 
             // Apply mascots to DOM Elements dynamically
             var owlMascotEl = document.querySelector('.fact-mascot');
@@ -495,7 +494,7 @@ define([], function () {
                 ctx: null,
                 isDrawing: false,
 
-                init: function () {
+                init: function() {
                     this.canvas = document.getElementById('scratch-canvas');
                     if (!this.canvas) {
                         return;
@@ -505,7 +504,7 @@ define([], function () {
                     this.bindEvents();
                 },
 
-                reset: function () {
+                reset: function() {
                     if (!this.canvas || !this.ctx) {
                         return;
                     }
@@ -529,7 +528,7 @@ define([], function () {
                     this.ctx.fillText(scratchHereText, this.canvas.width / 2, this.canvas.height / 2 + 5);
                 },
 
-                scratch: function (x, y) {
+                scratch: function(x, y) {
                     if (!this.ctx) {
                         return;
                     }
@@ -547,13 +546,13 @@ define([], function () {
                     }
                 },
 
-                bindEvents: function () {
+                bindEvents: function() {
                     var self = this;
                     if (!this.canvas) {
                         return;
                     }
 
-                    var getCoords = function (e) {
+                    var getCoords = function(e) {
                         var rect = self.canvas.getBoundingClientRect();
                         var touch = e.touches ? e.touches[0] : e;
                         return {
@@ -562,14 +561,14 @@ define([], function () {
                         };
                     };
 
-                    var onStart = function (e) {
+                    var onStart = function(e) {
                         e.preventDefault();
                         self.isDrawing = true;
                         var coords = getCoords(e);
                         self.scratch(coords.x, coords.y);
                     };
 
-                    var onMove = function (e) {
+                    var onMove = function(e) {
                         if (!self.isDrawing) {
                             return;
                         }
@@ -578,7 +577,7 @@ define([], function () {
                         self.scratch(coords.x, coords.y);
                     };
 
-                    var onEnd = function () {
+                    var onEnd = function() {
                         self.isDrawing = false;
                     };
 
@@ -598,7 +597,7 @@ define([], function () {
             // 5. Speech Owl Controller
             var OwlController = {
                 factIndex: 0,
-                cycleFact: function (e) {
+                cycleFact: function(e) {
                     var mascotEl = document.querySelector('.fact-bubble-widget .fact-mascot');
                     var textEl = document.querySelector('.fact-bubble-widget .fact-text');
                     if (!textEl) {
@@ -610,7 +609,7 @@ define([], function () {
                         var ctx = window.GaneshaChiptune.audioCtx;
                         if (ctx) {
                             window.GaneshaChiptune.playTone(660, 'triangle', ctx.currentTime, 0.04, 0.03);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 window.GaneshaChiptune.playTone(987, 'sine', ctx.currentTime + 0.04, 0.05, 0.03);
                             }, 40);
                         }
@@ -619,7 +618,7 @@ define([], function () {
                     // Bounce and flip the mascot character
                     if (mascotEl) {
                         mascotEl.style.transform = 'rotate(360deg) scale(1.3)';
-                        setTimeout(function () {
+                        setTimeout(function() {
                             mascotEl.style.transform = '';
                         }, 400);
                     }
@@ -648,7 +647,7 @@ define([], function () {
                 level: 1,
                 exp: 0,
 
-                init: function () {
+                init: function() {
                     var savedLevel = localStorage.getItem('ganesha_pet_level');
                     var savedExp = localStorage.getItem('ganesha_pet_exp');
                     if (savedLevel) {
@@ -660,7 +659,7 @@ define([], function () {
                     this.updateUI();
                 },
 
-                feed: function (e) {
+                feed: function(e) {
                     var mascotEl = document.querySelector('.modak-mascot');
                     var bubbleEl = document.getElementById('pet-speech-bubble');
                     if (!bubbleEl) {
@@ -672,9 +671,9 @@ define([], function () {
                         var ctx = window.GaneshaChiptune.audioCtx;
                         if (ctx) {
                             window.GaneshaChiptune.playTone(523.25, 'square', ctx.currentTime, 0.08, 0.04);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 window.GaneshaChiptune.playTone(659.25, 'square', ctx.currentTime + 0.08, 0.08, 0.04);
-                                setTimeout(function () {
+                                setTimeout(function() {
                                     window.GaneshaChiptune.playTone(
                                         987.77,
                                         'square',
@@ -690,7 +689,7 @@ define([], function () {
                     // Bouncy 3D feedback animation
                     if (mascotEl) {
                         mascotEl.style.transform = 'scale(1.4) translateY(-12px) rotate(8deg)';
-                        setTimeout(function () {
+                        setTimeout(function() {
                             mascotEl.style.transform = '';
                         }, 300);
                     }
@@ -715,7 +714,7 @@ define([], function () {
                     if (levelUp) {
                         bubbleEl.innerHTML = '"' + friendshipLevelUpText.replace('{level}', this.level) + '"';
                         if (window.GaneshaChiptune) {
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 var t = window.GaneshaChiptune.audioCtx.currentTime;
                                 window.GaneshaChiptune.playTone(523.25, 'sine', t, 0.1, 0.06);
                                 window.GaneshaChiptune.playTone(659.25, 'sine', t + 0.1, 0.1, 0.06);
@@ -731,7 +730,7 @@ define([], function () {
                     this.updateUI();
                 },
 
-                updateUI: function () {
+                updateUI: function() {
                     var lvl = document.getElementById('buddy-level');
                     var exp = document.getElementById('buddy-exp');
                     if (lvl) {
