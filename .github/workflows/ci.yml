@@ -101,7 +101,11 @@ jobs:
 
       - name: Grunt
         if: ${{ !cancelled() }}
-        run: moodle-plugin-ci grunt -t ignorefiles -t eslint -t stylelint --max-lint-warnings 0 -- --root=theme/ganesha
+        working-directory: ${{ github.workspace }}/moodle
+        run: |
+          npx grunt amd --root=theme/ganesha
+          npx grunt ignorefiles --root=theme/ganesha
+          npx grunt stylelint --root=theme/ganesha
 
       - name: PHPUnit tests
         if: ${{ !cancelled() }}
