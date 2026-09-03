@@ -36,7 +36,8 @@
         "config": {
             "wwwroot": "http://localhost"
         },
-        "isadmin": true
+        "isadmin": true,
+        "cansignup": true
     }
 }}
 {{> theme_boost/head }}
@@ -65,9 +66,11 @@
                         <a href="{{{ config.wwwroot }}}/login/index.php" class="btn btn-adventure-primary btn-lg bouncy-hover cartoon-btn text-white mr-3 mb-2">
                             🚀 {{#str}} startadventure, theme_ganesha {{/str}} ({{#str}} login, core {{/str}})
                         </a>
+                        {{#cansignup}}
                         <a href="{{{ config.wwwroot }}}/login/signup.php" class="btn btn-adventure-secondary btn-lg bouncy-hover cartoon-btn mb-2">
                             ✨ {{#str}} jointhequest, theme_ganesha {{/str}} ({{#str}} signup, theme_ganesha {{/str}})
                         </a>
+                        {{/cansignup}}
                     </div>
                     {{/isloggedin}}
                     

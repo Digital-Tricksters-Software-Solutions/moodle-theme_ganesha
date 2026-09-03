@@ -46,11 +46,17 @@ $owlmascot = get_config('theme_ganesha', 'owlmascot')
 $petmascot = get_config('theme_ganesha', 'petmascot')
     ?: theme_ganesha_get_default_string('petmascot_default', '🐘');
 
+if (!function_exists('signup_is_enabled')) {
+    require_once($CFG->libdir . '/authlib.php');
+}
+$cansignup = function_exists('signup_is_enabled') && signup_is_enabled();
+
 // Universal, crash-proof template context that offloads rendering to the output manager.
 $templatecontext = [
     'output' => $this,
     'config' => $CFG,
     'isloggedin' => isloggedin(),
+    'cansignup' => $cansignup,
     'footertext' => get_config('theme_ganesha', 'footertext')
         ?: theme_ganesha_get_default_string('footertext_default', 'Powered by Suman Kumar Das and Digital Tricksters'),
 
